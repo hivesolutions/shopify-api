@@ -37,12 +37,11 @@ __copyright__ = "Copyright (c) 2008-2012 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-BASE_URL = "https://www.easypay.pt/_s/"
-""" The default base url to be used for a production
-based environment, should be used carefully """
-
 class Api(object):
 
     def __init__(self, *args, **kwargs):
-        pass
-
+        self.api_key = kwargs.get("api_key", None)
+        self.password = kwargs.get("password", None)
+        self.secret = kwargs.get("secret", None)
+        self.store_url = kwargs.get("store_url", None)
+        self.base_url = "https://%s:%s@%s/"
