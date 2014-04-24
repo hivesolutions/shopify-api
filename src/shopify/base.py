@@ -37,11 +37,38 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-class Api(object):
+import appier
+
+from shopify import order
+
+class Api(
+    appier.Observable,
+    order.OrderApi
+):
 
     def __init__(self, *args, **kwargs):
         self.api_key = kwargs.get("api_key", None)
         self.password = kwargs.get("password", None)
         self.secret = kwargs.get("secret", None)
         self.store_url = kwargs.get("store_url", None)
-        self.base_url = "https://%s:%s@%s/"
+        self.base_url = "https://%s:%s@%s/" % (
+            self.api_key, self.password, self.store_url
+        )
+
+    def get(self, url, auth = True, token = False, **kwargs):
+        return self.request(
+            appier.get,
+            url,
+            params = kwargs
+        )
+
+    def request(self, method, *args, **kwargs):
+        try:
+            result = method(*args, **kwargs)
+        except appier.exceptions.HTTPError as exception:
+            self.handle_error(exception)
+
+        return result
+
+    def handle_error(self, error):
+        raise
