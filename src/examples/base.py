@@ -45,5 +45,6 @@ def get_api():
     return shopify.Api(
         api_key = os.environ.get("SHOPIFY_API_KEY"),
         password = os.environ.get("SHOPIFY_PASSWORD"),
-        secret = os.environ.get("SHOPIFY_SECRET")
+        secret = os.environ.get("SHOPIFY_SECRET"),
+        store_url = os.environ.get("SHOPIFY_STORE")
     )
