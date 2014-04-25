@@ -37,12 +37,12 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-class OrderApi(object):
+class WebhookApi(object):
 
-    def list_orders(self, *args, **kwargs):
-        url = self.base_url + "admin/orders.json"
+    def list_webhooks(self, *args, **kwargs):
+        url = self.base_url + "admin/webhooks.json"
         contents = self.get(
             url,
             **kwargs
         )
-        return contents["orders"]
+        return contents["webhooks"]

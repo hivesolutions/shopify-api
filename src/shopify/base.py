@@ -40,10 +40,12 @@ __license__ = "GNU General Public License (GPL), Version 3"
 import appier
 
 from shopify import order
+from shopify import webhook
 
 class Api(
     appier.Api,
-    order.OrderApi
+    order.OrderApi,
+    webhook.WebhookApi
 ):
 
     def __init__(self, *args, **kwargs):
@@ -52,9 +54,7 @@ class Api(
         self.password = kwargs.get("password", None)
         self.secret = kwargs.get("secret", None)
         self.store_url = kwargs.get("store_url", None)
-        self.base_url = "https://%s:%s@%s/" % (
-            self.api_key, self.password, self.store_url
-        )
+        self._build_url()
 
     def get(self, url, auth = True, token = False, **kwargs):
         return self.request(
@@ -73,3 +73,14 @@ class Api(
 
     def handle_error(self, error):
         raise
+
+    def _build_url(self):
+        if not self.api_key:
+            raise appier.OperationalError(message = "No api key provided")
+        if not self.password:
+            raise appier.OperationalError(message = "No password provided")
+        if not self.store_url:
+            raise appier.OperationalError(message = "No store url provided")
+        self.base_url = "https://%s:%s@%s/" % (
+            self.api_key, self.password, self.store_url
+        )
