@@ -42,11 +42,12 @@ import appier
 from shopify import order
 
 class Api(
-    appier.Observable,
+    appier.Api,
     order.OrderApi
 ):
 
     def __init__(self, *args, **kwargs):
+        appier.Api.__init__(self, *args, **kwargs)
         self.api_key = kwargs.get("api_key", None)
         self.password = kwargs.get("password", None)
         self.secret = kwargs.get("secret", None)
