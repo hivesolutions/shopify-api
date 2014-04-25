@@ -72,6 +72,22 @@ class Api(
             data_j = data_j
         )
 
+    def put(self, url, data = None, data_j = None, **kwargs):
+        return self.request(
+            appier.put,
+            url,
+            params = kwargs,
+            data = data,
+            data_j = data_j
+        )
+
+    def delete(self, url, **kwargs):
+        return self.request(
+            appier.delete,
+            url,
+            params = kwargs
+        )
+
     def request(self, method, *args, **kwargs):
         try:
             result = method(*args, **kwargs)
