@@ -46,3 +46,14 @@ class OrderApi(object):
             **kwargs
         )
         return contents["orders"]
+
+    def pay_order(self, id):
+        url = self.base_url + "admin/orders/%d.json" % id
+        self.put(
+            url,
+            data_j = dict(
+                order = dict(
+                    financial_status = "paid"
+                )
+            )
+        )
