@@ -56,11 +56,20 @@ class Api(
         self.store_url = kwargs.get("store_url", None)
         self._build_url()
 
-    def get(self, url, auth = True, token = False, **kwargs):
+    def get(self, url, **kwargs):
         return self.request(
             appier.get,
             url,
             params = kwargs
+        )
+
+    def post(self, url, data = None, data_j = None, **kwargs):
+        return self.request(
+            appier.post,
+            url,
+            params = kwargs,
+            data = data,
+            data_j = data_j
         )
 
     def request(self, method, *args, **kwargs):
