@@ -48,12 +48,12 @@ class OrderApi(object):
         return contents["orders"]
 
     def pay_order(self, id):
-        url = self.base_url + "admin/orders/%d.json" % id
-        self.put(
+        url = self.base_url + "admin/orders/%d/transactions.json" % id
+        self.post(
             url,
             data_j = dict(
-                order = dict(
-                    financial_status = "paid"
+                transaction = dict(
+                    kind = "capture"
                 )
             )
         )
