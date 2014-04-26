@@ -57,3 +57,13 @@ class OrderApi(object):
                 )
             )
         )
+
+    def cancel_order(self, id, restock = True, email = False):
+        url = self.base_url + "admin/orders/%d/cancel.json" % id
+        self.post(
+            url,
+            data_j = dict(
+                restock = restock,
+                email = email
+            )
+        )
