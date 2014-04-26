@@ -1,3 +1,6 @@
 *.pyc
 
 session.shelve
+
+/dist/
+/src/shopify_api.egg-info/
