@@ -47,6 +47,20 @@ class OrderApi(object):
         )
         return contents["orders"]
 
+    def get_order(self, id):
+        url = self.base_url + "admin/orders/%d.json" % id
+        contents = self.get(url)
+        return contents["order"]
+
+    def update_order(self, id, **kwargs):
+        order = dict(kwargs)
+        order["id"] = str(id)
+        url = self.base_url + "admin/orders/%d.json" % id
+        self.put(
+            url,
+            data_j = dict(order = order)
+        )
+
     def pay_order(self, id):
         url = self.base_url + "admin/orders/%d/transactions.json" % id
         self.post(
