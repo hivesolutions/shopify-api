@@ -37,14 +37,14 @@ __copyright__ = "Copyright (c) 2008-2014 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
-import os
+import appier
 
 import shopify
 
 def get_api():
     return shopify.Api(
-        api_key = os.environ.get("SHOPIFY_API_KEY"),
-        password = os.environ.get("SHOPIFY_PASSWORD"),
-        secret = os.environ.get("SHOPIFY_SECRET"),
-        store_url = os.environ.get("SHOPIFY_STORE")
+        api_key = appier.conf("SHOPIFY_API_KEY"),
+        password = appier.conf("SHOPIFY_PASSWORD"),
+        secret = appier.conf("SHOPIFY_SECRET"),
+        store_url = appier.conf("SHOPIFY_STORE")
     )
