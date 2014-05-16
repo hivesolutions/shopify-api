@@ -48,7 +48,7 @@ setuptools.setup(
     description = "Shopify API",
     license = "GNU General Public License (GPL), Version 3",
     keywords = "shopify api",
-    url = "http://shopify.com",
+    url = "http://shopify_api.hive.pt",
     zip_safe = False,
     packages = [
         "shopify"
