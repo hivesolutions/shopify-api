@@ -56,49 +56,6 @@ class Api(
         self.store_url = kwargs.get("store_url", None)
         self._build_url()
 
-    def get(self, url, **kwargs):
-        return self.request(
-            appier.get,
-            url,
-            params = kwargs
-        )
-
-    def post(self, url, data = None, data_j = None, **kwargs):
-        return self.request(
-            appier.post,
-            url,
-            params = kwargs,
-            data = data,
-            data_j = data_j
-        )
-
-    def put(self, url, data = None, data_j = None, **kwargs):
-        return self.request(
-            appier.put,
-            url,
-            params = kwargs,
-            data = data,
-            data_j = data_j
-        )
-
-    def delete(self, url, **kwargs):
-        return self.request(
-            appier.delete,
-            url,
-            params = kwargs
-        )
-
-    def request(self, method, *args, **kwargs):
-        try:
-            result = method(*args, **kwargs)
-        except appier.exceptions.HTTPError as exception:
-            self.handle_error(exception)
-
-        return result
-
-    def handle_error(self, error):
-        raise
-
     def _build_url(self):
         if not self.api_key:
             raise appier.OperationalError(message = "No api key provided")
