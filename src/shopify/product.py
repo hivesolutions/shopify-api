@@ -46,7 +46,7 @@ class ProductApi(object):
             **kwargs
         )
         return contents["products"]
-    
+
     def many_products(self, *args, **kwargs):
         url = self.base_url + "admin/products.json"
         contents = self.get_many(
@@ -55,3 +55,12 @@ class ProductApi(object):
             **kwargs
         )
         return contents["products"]
+
+    def images_product(self, id, *args, **kwargs):
+        url = self.base_url + "admin/products/%d/images.json" % id
+        print url
+        contents = self.get(
+            url,
+            **kwargs
+        )
+        return contents["images"]
