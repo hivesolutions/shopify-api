@@ -58,6 +58,18 @@ class Api(
         self.store_url = kwargs.get("store_url", None)
         self._build_url()
 
+    def get_many(self, url, key = None, **kwargs):
+            page = 1
+            result = []
+            while True:
+                items = self.get(url, page = page, **kwargs)
+                if key: items = items[key]
+                if not items: break
+                result.extend(items)
+                page += 1
+            if key: result = {key : result}
+            return result
+
     def _build_url(self):
         if not self.api_key:
             raise appier.OperationalError(message = "No api key provided")

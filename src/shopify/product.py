@@ -46,3 +46,12 @@ class ProductApi(object):
             **kwargs
         )
         return contents["products"]
+    
+    def many_products(self, *args, **kwargs):
+        url = self.base_url + "admin/products.json"
+        contents = self.get_many(
+            url,
+            key = "products",
+            **kwargs
+        )
+        return contents["products"]
