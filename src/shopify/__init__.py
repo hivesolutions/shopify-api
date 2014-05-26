@@ -36,8 +36,10 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 from . import base
 from . import order
+from . import product
 from . import webhook
 
 from .base import *
 from .order import *
+from .product import *
 from .webhook import *

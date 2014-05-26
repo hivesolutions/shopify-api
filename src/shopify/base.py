@@ -40,11 +40,13 @@ __license__ = "GNU General Public License (GPL), Version 3"
 import appier
 
 from shopify import order
+from shopify import product
 from shopify import webhook
 
 class Api(
     appier.Api,
     order.OrderApi,
+    product.ProductApi,
     webhook.WebhookApi
 ):
 
