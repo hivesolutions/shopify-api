@@ -58,6 +58,7 @@ class ProductApi(object):
 
     def images_product(self, id, *args, **kwargs):
         url = self.base_url + "admin/products/%d/images.json" % id
+        print url
         contents = self.get(
             url,
             **kwargs
