@@ -38,6 +38,4 @@ from . import base
 from . import order
 from . import product
 
-from .base import *
-from .order import *
-from .product import *
+from .base import get_api

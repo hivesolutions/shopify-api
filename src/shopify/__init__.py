@@ -39,7 +39,7 @@ from . import order
 from . import product
 from . import webhook
 
-from .base import *
-from .order import *
-from .product import *
-from .webhook import *
+from .base import Api
+from .order import OrderApi
+from .product import ProductApi
+from .webhook import WebhookApi
