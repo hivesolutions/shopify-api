@@ -52,10 +52,14 @@ class Api(
 
     def __init__(self, *args, **kwargs):
         appier.Api.__init__(self, *args, **kwargs)
-        self.api_key = kwargs.get("api_key", None)
-        self.password = kwargs.get("password", None)
-        self.secret = kwargs.get("secret", None)
-        self.store_url = kwargs.get("store_url", None)
+        self.api_key = appier.conf("SHOPIFY_API_KEY", None)
+        self.password = appier.conf("SHOPIFY_PASSWORD", None)
+        self.secret = appier.conf("SHOPIFY_SECRET", None)
+        self.store_url = appier.conf("SHOPIFY_STORE", None)
+        self.api_key = kwargs.get("api_key", self.api_key)
+        self.password = kwargs.get("password", self.password)
+        self.secret = kwargs.get("secret", self.secret)
+        self.store_url = kwargs.get("store_url", self.store_url)
         self._build_url()
 
     def get_many(self, url, key = None, **kwargs):
