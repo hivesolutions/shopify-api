@@ -52,6 +52,11 @@ class OrderApi(object):
         contents = self.get(url)
         return contents["order"]
 
+    def transactions_order(self, id):
+        url = self.base_url + "admin/orders/%d/transactions.json" % id
+        contents = self.get(url)
+        return contents["transactions"]
+
     def update_order(self, id, **kwargs):
         order = dict(kwargs)
         order["id"] = str(id)
