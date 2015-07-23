@@ -40,17 +40,21 @@ __license__ = "GNU General Public License (GPL), Version 3"
 class CartApi(object):
 
     def show_cart(self):
-        url = self.base_url + "cart.js"
-        contents = self.get(url)
+        url = self.website_url + "cart.js"
+        contents = self.get(url, handle = False)
+        print(contents.info()["Set-Cookie"])
+        print(repr(contents.read()))
+        #@todo need to process the cookie and set
+        # the current session id
         return contents
 
     def clear_cart(self):
-        url = self.base_url + "cart/clear.js"
+        url = self.website_url + "cart/clear.js"
         contents = self.post(url)
         return contents
 
     def add_cart(self, id, quantity = 1):
-        url = self.base_url + "cart/add.js"
+        url = self.website_url + "cart/add.js"
         contents = self.post(
             url,
             json_d = dict(

@@ -58,10 +58,12 @@ class Api(
         self.password = appier.conf("SHOPIFY_PASSWORD", None)
         self.secret = appier.conf("SHOPIFY_SECRET", None)
         self.store_url = appier.conf("SHOPIFY_STORE", None)
+        self.website_url = appier.conf("SHOPIFY_WEBSITE", None)
         self.api_key = kwargs.get("api_key", self.api_key)
         self.password = kwargs.get("password", self.password)
         self.secret = kwargs.get("secret", self.secret)
         self.store_url = kwargs.get("store_url", self.store_url)
+        self.website_url = kwargs.get("website_url", self.website_url)
         self._build_url()
 
     def get_many(self, url, key = None, **kwargs):
@@ -86,3 +88,4 @@ class Api(
         self.base_url = "https://%s:%s@%s/" % (
             self.api_key, self.password, self.store_url
         )
+        self.website_url = "http://%s/" % (self.website_url or self.store_url)
