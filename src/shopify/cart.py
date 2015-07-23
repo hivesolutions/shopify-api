@@ -42,4 +42,15 @@ class CartApi(object):
     def show_cart(self):
         url = self.base_url + "cart.js"
         contents = self.get(url)
-        return contents["orders"]
+        return contents
+
+    def add_cart(self, id, quantity = 1):
+        url = self.base_url + "cart.js"
+        contents = self.post(
+            url,
+            json_d = dict(
+                id = id,
+                quantity = quantity
+            )
+        )
+        return contents
