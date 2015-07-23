@@ -39,12 +39,14 @@ __license__ = "GNU General Public License (GPL), Version 3"
 
 import appier
 
+from . import cart
 from . import order
 from . import product
 from . import webhook
 
 class Api(
     appier.Api,
+    cart.CartApi,
     order.OrderApi,
     product.ProductApi,
     webhook.WebhookApi
