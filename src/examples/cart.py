@@ -19,6 +19,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Hive Shopify API. If not, see <http://www.gnu.org/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -35,8 +38,7 @@ __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
 from . import base
-from . import cart
-from . import order
-from . import product
 
-from .base import get_api
+if __name__ == "__main__":
+    api = base.get_api()
+    print(api.show_cart())
