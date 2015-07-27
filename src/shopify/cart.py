@@ -37,29 +37,41 @@ __copyright__ = "Copyright (c) 2008-2015 Hive Solutions Lda."
 __license__ = "GNU General Public License (GPL), Version 3"
 """ The license for the module """
 
+import appier
+
 class CartApi(object):
 
     def show_cart(self):
         url = self.website_url + "cart.js"
-        contents = self.get(url, handle = False)
-        print(contents.info()["Set-Cookie"])
-        print(repr(contents.read()))
-        #@todo need to process the cookie and set
-        # the current session id
+        contents, file = self.get(url, handle = True)
+        self._handle_cookie(file)
         return contents
 
     def clear_cart(self):
         url = self.website_url + "cart/clear.js"
-        contents = self.post(url)
+        contents, file = self.post(url, handle = True)
+        self._handle_cookie(file)
         return contents
 
     def add_cart(self, id, quantity = 1):
         url = self.website_url + "cart/add.js"
-        contents = self.post(
+        contents, file = self.post(
             url,
             json_d = dict(
                 id = id,
                 quantity = quantity
-            )
+            ),
+            handle = True
         )
+        self._handle_cookie(file)
         return contents
+
+    def _handle_cookie(self, file):
+        headers = file.info()
+        cookie = headers.get("Set-Cookie", None)
+        if not cookie: return
+        cookie_m = appier.parse_cookie(cookie)
+        session_id = cookie_m.get("_session_id", None)
+        cart = cookie_m.get("cart", None)
+        if session_id: self.session_id = session_id
+        if cart: self.cart = cart
