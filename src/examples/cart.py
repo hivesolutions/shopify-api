@@ -41,4 +41,7 @@ from . import base
 
 if __name__ == "__main__":
     api = base.get_api()
+    api.add_cart("3595866373")
+    print(api.show_cart())
+    api.clear_cart()
     print(api.show_cart())

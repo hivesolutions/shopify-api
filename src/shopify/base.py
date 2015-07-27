@@ -66,6 +66,15 @@ class Api(
         self.website_url = kwargs.get("website_url", self.website_url)
         self._build_url()
 
+    def build(self, method, url, headers, kwargs):
+        cookie_l = []
+        if hasattr(self, "session_id"):
+            cookie_l.append("_session_id=%s" % self.session_id)
+        if hasattr(self, "cart"): cookie_l.append("cart=%s" % self.cart)
+        cookie = ";".join(cookie_l)
+        if not cookie: return
+        headers["Cookie"] = cookie
+
     def get_many(self, url, key = None, **kwargs):
             page = 1
             result = []

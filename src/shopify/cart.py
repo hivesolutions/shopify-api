@@ -57,7 +57,7 @@ class CartApi(object):
         url = self.website_url + "cart/add.js"
         contents, file = self.post(
             url,
-            json_d = dict(
+            data_j = dict(
                 id = id,
                 quantity = quantity
             ),
