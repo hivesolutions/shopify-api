@@ -41,7 +41,7 @@ import appier
 
 class CartApi(object):
 
-    def show_cart(self):
+    def get_cart(self):
         url = self.website_url + "cart.js"
         contents, file = self.get(url, handle = True)
         self._handle_cookie(file)
