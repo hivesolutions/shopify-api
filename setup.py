@@ -45,7 +45,7 @@ setuptools.setup(
     version = "0.1.3",
     author = "Hive Solutions Lda.",
     author_email = "development@hive.pt",
-    description = "Shopify API",
+    description = "Shopify API Client",
     license = "GNU General Public License (GPL), Version 3",
     keywords = "shopify api",
     url = "http://shopify_api.hive.pt",
