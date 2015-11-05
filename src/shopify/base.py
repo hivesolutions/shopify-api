@@ -66,7 +66,18 @@ class Api(
         self.website_url = kwargs.get("website_url", self.website_url)
         self._build_url()
 
-    def build(self, method, url, headers, kwargs):
+    def build(
+        self,
+        method,
+        url,
+        data = None,
+        data_j = None,
+        data_m = None,
+        headers = None,
+        params = None,
+        mime = None,
+        kwargs = None
+    ):
         cookie_l = []
         if hasattr(self, "session_id"):
             cookie_l.append("_session_id=%s" % self.session_id)

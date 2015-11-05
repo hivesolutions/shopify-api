@@ -1,0 +1,27 @@
+sudo: false
+language: python
+python:
+  - "2.6"
+  - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "nightly"
+  - "pypy"
+  - "pypy3"
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
+  - pip install twine
+script: if [[ $TRAVIS_PYTHON_VERSION != "3.2" ]]; then coverage run --source=shopify setup.py test; else python setup.py test; fi
+after_success: coveralls
+deploy:
+  provider: pypi
+  user: joamag
+  password:
+    secure: IHSKAyUmp1Gv2ZmO+r16rB9ocfIY8Ov/wwRZtVuGaTRogt34F42Of0y0IH1HNOjHu1VawaAIytCF9ETuB8JcYUcn6qo2qrqEeDZ8zi/UUrFiuCYBCBsdg91TUwxMfUrAfCLMKeQh8GkMuS5c1XWjxzMgNhRZb6FyCioaTiU4P2I=
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    python: "2.7"
