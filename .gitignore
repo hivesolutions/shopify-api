@@ -3,4 +3,5 @@
 session.shelve
 
 /dist
+/build
 /src/shopify_api.egg-info
