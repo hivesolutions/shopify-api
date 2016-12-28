@@ -45,3 +45,5 @@ if __name__ == "__main__":
     print(api.show_cart())
     api.clear_cart()
     print(api.show_cart())
+else:
+    __path__ = []

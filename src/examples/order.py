@@ -42,3 +42,5 @@ from . import base
 if __name__ == "__main__":
     api = base.get_api()
     print(api.list_orders(limit = 3))
+else:
+    __path__ = []
