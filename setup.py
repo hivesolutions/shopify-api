@@ -48,7 +48,7 @@ setuptools.setup(
     description = "Shopify API Client",
     license = "Apache License, Version 2.0",
     keywords = "shopify api",
-    url = "http://shopify_api.hive.pt",
+    url = "http://shopify-api.hive.pt",
     zip_safe = False,
     packages = [
         "shopify"
