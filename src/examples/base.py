@@ -42,7 +42,7 @@ import appier
 import shopify
 
 def get_api():
-    return shopify.Api(
+    return shopify.API(
         api_key = appier.conf("SHOPIFY_API_KEY"),
         password = appier.conf("SHOPIFY_PASSWORD"),
         secret = appier.conf("SHOPIFY_SECRET"),

@@ -44,16 +44,16 @@ from . import order
 from . import product
 from . import webhook
 
-class Api(
-    appier.Api,
-    cart.CartApi,
-    order.OrderApi,
-    product.ProductApi,
-    webhook.WebhookApi
+class API(
+    appier.API,
+    cart.CartAPI,
+    order.OrderAPI,
+    product.ProductAPI,
+    webhook.WebhookAPI
 ):
 
     def __init__(self, *args, **kwargs):
-        appier.Api.__init__(self, *args, **kwargs)
+        appier.API.__init__(self, *args, **kwargs)
         self.api_key = appier.conf("SHOPIFY_API_KEY", None)
         self.password = appier.conf("SHOPIFY_PASSWORD", None)
         self.secret = appier.conf("SHOPIFY_SECRET", None)

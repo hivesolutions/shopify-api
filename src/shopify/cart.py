@@ -39,7 +39,7 @@ __license__ = "Apache License, Version 2.0"
 
 import appier
 
-class CartApi(object):
+class CartAPI(object):
 
     def get_cart(self):
         url = self.website_url + "cart.js"

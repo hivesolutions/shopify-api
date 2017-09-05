@@ -40,8 +40,8 @@ from . import order
 from . import product
 from . import webhook
 
-from .base import Api
-from .cart import CartApi
-from .order import OrderApi
-from .product import ProductApi
-from .webhook import WebhookApi
+from .base import API
+from .cart import CartAPI
+from .order import OrderAPI
+from .product import ProductAPI
+from .webhook import WebhookAPI
