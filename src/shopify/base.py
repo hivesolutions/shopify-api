@@ -100,11 +100,11 @@ class API(
 
     def _build_url(self):
         if not self.api_key:
-            raise appier.OperationalError(message = "No api key provided")
+            raise appier.OperationalError(message = "No API key provided")
         if not self.password:
             raise appier.OperationalError(message = "No password provided")
         if not self.store_url:
-            raise appier.OperationalError(message = "No store url provided")
+            raise appier.OperationalError(message = "No store URL provided")
         self.base_url = "https://%s:%s@%s/" % (
             self.api_key, self.password, self.store_url
         )
