@@ -53,14 +53,20 @@ class CartAPI(object):
         self._handle_cookie(file)
         return contents
 
-    def add_cart(self, id, quantity = 1):
+    def add_cart(self, id, quantity = 1, properties={}):
         url = self.website_url + "cart/add.js"
+        data_j = {}
+        data_j["items"] = [
+            dict(
+                id=id,
+                quantity=quantity,
+                properties=properties
+            )
+        ]
+
         contents, file = self.post(
             url,
-            data_j = dict(
-                id = id,
-                quantity = quantity
-            ),
+            data_j=data_j,
             handle = True
         )
         self._handle_cookie(file)
