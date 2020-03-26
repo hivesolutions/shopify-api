@@ -38,7 +38,6 @@ __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
 import appier
-
 class CartAPI(object):
 
     def get_cart(self):
@@ -53,7 +52,7 @@ class CartAPI(object):
         self._handle_cookie(file)
         return contents
 
-    def add_cart(self, id, quantity = 1, properties={}):
+    def add_cart(self, id, quantity=1, properties={}, headers={}):
         url = self.website_url + "cart/add.js"
         data_j = {}
         data_j["items"] = [
@@ -67,9 +66,9 @@ class CartAPI(object):
         contents, file = self.post(
             url,
             data_j=data_j,
+            headers=headers,
             handle = True
         )
-        self._handle_cookie(file)
         return contents
 
     def _handle_cookie(self, file):
