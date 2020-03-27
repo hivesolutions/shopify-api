@@ -42,12 +42,12 @@ class CartAPI(object):
 
     def get_cart(self, params={}):
         url = self.website_url + "cart.js"
-        contents, file = self.get(url, kwargs=params, handle=True)
+        contents = self.get(url, kwargs=params, handle=True)
         return contents
 
     def clear_cart(self, params={}):
         url = self.website_url + "cart/clear.js"
-        contents, file = self.get(url, kwargs=params, handle = True)
+        contents = self.get(url, kwargs=params, handle = True)
         return contents
 
     def add_cart(self, id, quantity=1, properties={}, params={}):
@@ -61,7 +61,7 @@ class CartAPI(object):
             )
         ]
 
-        contents, file = self.post(
+        contents = self.post(
             url,
             data_j=data_j,
             kwargs=params,
