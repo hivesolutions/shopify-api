@@ -40,10 +40,9 @@ __license__ = "Apache License, Version 2.0"
 import appier
 class CartAPI(object):
 
-    def get_cart(self):
+    def get_cart(self, headers={}):
         url = self.website_url + "cart.js"
-        contents, file = self.get(url, handle = True)
-        self._handle_cookie(file)
+        contents, file = self.get(url, headers=headers, handle=True)
         return contents
 
     def clear_cart(self):

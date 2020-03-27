@@ -79,6 +79,7 @@ class API(
         kwargs = None
     ):
         cookie_l = []
+        # Each cookie must contain the token, path and domain, ex: 2312312323; Path=/; Domain=.myshop.myshopify.com; Secure;
         if "Storefront-Digest" in headers:
             cookie_l.append("storefront_digest=%s" % headers["Storefront-Digest"])
         if "Cart" in headers: 
@@ -109,4 +110,4 @@ class API(
         self.base_url = "https://%s:%s@%s/" % (
             self.api_key, self.password, self.store_url
         )
-        self.website_url = "http://%s/" % (self.website_url or self.store_url)
+        self.website_url = "https://%s/" % (self.website_url or self.store_url)
