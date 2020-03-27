@@ -45,10 +45,9 @@ class CartAPI(object):
         contents, file = self.get(url, headers=headers, handle=True)
         return contents
 
-    def clear_cart(self):
+    def clear_cart(self, headers={}):
         url = self.website_url + "cart/clear.js"
-        contents, file = self.post(url, handle = True)
-        self._handle_cookie(file)
+        contents, file = self.get(url, headers=headers, handle = True)
         return contents
 
     def add_cart(self, id, quantity=1, properties={}, headers={}):
@@ -69,13 +68,3 @@ class CartAPI(object):
             handle = True
         )
         return contents
-
-    def _handle_cookie(self, file):
-        headers = file.info()
-        cookie = headers.get("Set-Cookie", None)
-        if not cookie: return
-        cookie_m = appier.parse_cookie(cookie)
-        session_id = cookie_m.get("_session_id", None)
-        cart = cookie_m.get("cart", None)
-        if session_id: self.session_id = session_id
-        if cart: self.cart = cart
