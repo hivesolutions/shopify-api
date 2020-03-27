@@ -78,15 +78,26 @@ class API(
         mime = None,
         kwargs = None
     ):
+        if not "kwargs" in kwargs: return
+
+        args = kwargs["kwargs"]
+        
         cookie_l = []
+        shopify_domain = None
+        
         # Each cookie must contain the token, path and domain, ex: 2312312323; Path=/; Domain=.myshop.myshopify.com; Secure;
-        if "Storefront-Digest" in headers:
-            cookie_l.append("storefront_digest=%s" % headers["Storefront-Digest"])
-        if "Cart" in headers: 
-            cookie_l.append("cart=%s" % headers["Cart"])
+        if "shopify_domain" in args:
+            shopify_domain = args["shopify_domain"]
+        if "storefront_digest" in args:
+            storefront_digest_cookie = "storefront_digest=%s; Path=/; Domain=%s; Secure;" % (args["storefront_digest"], shopify_domain)
+            cookie_l.append(storefront_digest_cookie)
+        if "cart" in args: 
+            cart_cookie = "cart=%s; Path=/; Domain=%s; Secure;" % (args["cart"], shopify_domain)
+            cookie_l.append(cart_cookie)
 
         cookie = "".join(cookie_l)
         headers["Cookie"] = cookie
+        kwargs = None
 
     def get_many(self, url, key = None, **kwargs):
             page = 1

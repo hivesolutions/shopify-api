@@ -40,17 +40,17 @@ __license__ = "Apache License, Version 2.0"
 import appier
 class CartAPI(object):
 
-    def get_cart(self, headers={}):
+    def get_cart(self, params={}):
         url = self.website_url + "cart.js"
-        contents, file = self.get(url, headers=headers, handle=True)
+        contents, file = self.get(url, kwargs=params, handle=True)
         return contents
 
-    def clear_cart(self, headers={}):
+    def clear_cart(self, params={}):
         url = self.website_url + "cart/clear.js"
-        contents, file = self.get(url, headers=headers, handle = True)
+        contents, file = self.get(url, kwargs=params, handle = True)
         return contents
 
-    def add_cart(self, id, quantity=1, properties={}, headers={}):
+    def add_cart(self, id, quantity=1, properties={}, params={}):
         url = self.website_url + "cart/add.js"
         data_j = {}
         data_j["items"] = [
@@ -64,7 +64,7 @@ class CartAPI(object):
         contents, file = self.post(
             url,
             data_j=data_j,
-            headers=headers,
+            kwargs=params,
             handle = True
         )
         return contents
