@@ -63,3 +63,11 @@ class ProductAPI(object):
             **kwargs
         )
         return contents["images"]
+
+    def metafields_product(self, id, *args, **kwargs):
+        url = self.base_url + "admin/products/%d/metafields.json" % id
+        contents = self.get(
+            url,
+            **kwargs
+        )
+        return contents["metafields"]
