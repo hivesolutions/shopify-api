@@ -49,6 +49,8 @@ class ShopifyApp(appier.WebApp):
             name = "shopify",
             *args, **kwargs
         )
+        self.frame_options = False
+        self.content_security = False
         self.set_cookie_suffix = "SameSite=None;Secure;"
 
     @appier.route("/", "GET")
@@ -62,12 +64,20 @@ class ShopifyApp(appier.WebApp):
         api = self.get_api()
         products = api.list_products()
         return products
-    
+
     @appier.route("/embed", "GET")
     def embed(self):
         url = self.ensure_api()
         if url: return self.redirect(url)
-        return appier.html("<body>Shopify App is now embedded</body>")
+        api = self.get_api()
+        product_count = api.count_products()
+        return self.html("<html>" +
+            "<body>"
+            "<p>Shopify App is now embedded (%s)</p>" % (api.access_token) +
+            "<p>There are %d products in the current store</p>" % (product_count) +
+            "</body>" +
+            "</html>"
+        )
 
     @appier.route("/logout", "GET")
     def logout(self):
