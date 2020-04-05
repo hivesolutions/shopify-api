@@ -34,9 +34,11 @@ __copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
+from . import app
 from . import base
 from . import cart
 from . import order
 from . import product
 
-from .base import get_api
+from .app import ShopifyApp
+from .base import get_api, get_oauth_api

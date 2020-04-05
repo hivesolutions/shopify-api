@@ -48,3 +48,10 @@ def get_api():
         secret = appier.conf("SHOPIFY_SECRET"),
         store_url = appier.conf("SHOPIFY_STORE")
     )
+
+def get_oauth_api():
+    return shopify.OAuthAPI(
+        client_id = appier.conf("SHOPIFY_ID"),
+        client_secret = appier.conf("SHOPIFY_SECRET"),
+        redirect_url = appier.conf("SHOPIFY_REDIRECT_URL")
+    )
