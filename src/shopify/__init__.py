@@ -40,7 +40,7 @@ from . import order
 from . import product
 from . import webhook
 
-from .base import API
+from .base import API, OAuthAPI
 from .cart import CartAPI
 from .order import OrderAPI
 from .product import ProductAPI
