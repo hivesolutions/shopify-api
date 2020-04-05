@@ -49,10 +49,11 @@ class ShopifyApp(appier.WebApp):
             name = "shopify",
             *args, **kwargs
         )
+        self.set_cookie_suffix = "SameSite=None;Secure;"
 
     @appier.route("/", "GET")
     def index(self):
-        return self.me()
+        return self.products()
 
     @appier.route("/products", "GET")
     def products(self):
