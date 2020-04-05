@@ -60,8 +60,14 @@ class ShopifyApp(appier.WebApp):
         url = self.ensure_api()
         if url: return self.redirect(url)
         api = self.get_api()
-        products = api.list_products()()
+        products = api.list_products()
         return products
+    
+    @appier.route("/embed", "GET")
+    def embed(self):
+        url = self.ensure_api()
+        if url: return self.redirect(url)
+        return appier.html("<body>Shopify App is now embedded</body>")
 
     @appier.route("/logout", "GET")
     def logout(self):
@@ -78,7 +84,7 @@ class ShopifyApp(appier.WebApp):
         )
         api = self.get_api()
         access_token = api.oauth_access(code)
-        self.session["gh.access_token"] = access_token
+        self.session["shopify.access_token"] = access_token
         return self.redirect(
             self.url_for("shopify.index")
         )
