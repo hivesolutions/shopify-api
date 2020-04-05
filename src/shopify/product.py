@@ -56,9 +56,12 @@ class ProductAPI(object):
         )
         return contents["products"]
 
-    def count_products(self):
+    def count_products(self, *args, **kwargs):
         url = self.base_url + "admin/products/count.json"
-        contents = self.get(url)
+        contents = self.get(
+            url,
+            **kwargs
+        )
         return contents["count"]
 
     def images_product(self, id, *args, **kwargs):
