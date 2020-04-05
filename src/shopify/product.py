@@ -71,3 +71,18 @@ class ProductAPI(object):
             **kwargs
         )
         return contents["metafields"]
+
+    def create_metafield_product(self, id, key, value, type = "string", namespace = "global"):
+        url = self.base_url + "admin/products/%d/metafields.json" % id
+        contents = self.post(
+            url,
+            data_j = dict(
+                metafield = dict(
+                    namespace = namespace,
+                    key = key,
+                    value = value,
+                    value_type = type
+                )
+            )
+        )
+        return contents["metafield"]
