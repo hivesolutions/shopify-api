@@ -1,4 +1,4 @@
-# Shopify API
+# [Shopify API](https://shopify-api.bemisc.com)
 
 API client for the [Shopify](https://www.shopify.com) service.
 
