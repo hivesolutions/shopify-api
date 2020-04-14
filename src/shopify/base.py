@@ -118,7 +118,7 @@ class API(
             return result
 
     def graphql(self, query_data):
-        url = self.base_url + "admin/api/2020-01/graphql.json"
+        url = self.base_url + "admin/api/graphql.json"
         contents = self.post(url = url, data = query_data, headers = { "Content-Type": "application/graphql" })
         return contents
 
