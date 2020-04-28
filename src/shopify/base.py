@@ -83,7 +83,6 @@ class API(
         self.secret = kwargs.get("secret", self.secret)
         self.store_url = kwargs.get("store_url", self.store_url)
         self.website_url = kwargs.get("website_url", self.website_url)
-        self._build_url()
 
     def build(
         self,
@@ -101,6 +100,9 @@ class API(
         if hasattr(self, "session_id"):
             cookie_l.append("_session_id=%s" % self.session_id)
         if hasattr(self, "cart"): cookie_l.append("cart=%s" % self.cart)
+        if hasattr(self, "shopify_domain") and hasattr(self, "storefront_digest"): cookie_l.append("storefront_digest=%s; Path=/; Domain=%s; Secure;" % (self.storefront_digest, self.shopify_domain))
+        if hasattr(self, "shopify_domain") and hasattr(self, "cart"): cookie_l.append("cart=%s; Path=/; Domain=%s; Secure;" % (self.cart, self.shopify_domain))
+
         cookie = ";".join(cookie_l)
         if not cookie: return
         headers["Cookie"] = cookie
@@ -122,17 +124,18 @@ class API(
         contents = self.post(url = url, data = query_data, headers = { "Content-Type": "application/graphql" })
         return contents
 
-    def _build_url(self):
+    @property
+    def base_url(self):
+        if hasattr(self, "_base_url"): return self._base_url
         if not self.api_key:
             raise appier.OperationalError(message = "No API key provided")
         if not self.password:
             raise appier.OperationalError(message = "No password provided")
         if not self.store_url:
             raise appier.OperationalError(message = "No store URL provided")
-        self.base_url = "https://%s:%s@%s/" % (
+        self._base_url = "https://%s:%s@%s/" % (
             self.api_key, self.password, self.store_url
         )
-        self.website_url = "http://%s/" % (self.website_url or self.store_url)
 
 class OAuthAPI(appier.OAuth2API, API):
 
@@ -178,7 +181,9 @@ class OAuthAPI(appier.OAuth2API, API):
         self.trigger("access_token", self.access_token)
         return self.access_token
 
+    @property
     def _build_url(self):
+        if hasattr(self, "_base_url"): return self._base_url
         if not self.store_url:
             raise appier.OperationalError(message = "No store URL provided")
-        self.base_url = "https://%s/" % self.store_url
+        self._base_url = "https://%s/" % self.store_url

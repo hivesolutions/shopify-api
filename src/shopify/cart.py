@@ -44,26 +44,27 @@ class CartAPI(object):
     def get_cart(self):
         url = self.website_url + "cart.js"
         contents, file = self.get(url, handle = True)
-        self._handle_cookie(file)
+        if not hasattr(self, "cart"): self._handle_cookie(file)
         return contents
 
     def clear_cart(self):
         url = self.website_url + "cart/clear.js"
         contents, file = self.post(url, handle = True)
-        self._handle_cookie(file)
+        if not hasattr(self, "cart"): self._handle_cookie(file)
         return contents
 
-    def add_cart(self, id, quantity = 1):
+    def add_cart(self, id, quantity = 1, properties = {}):
         url = self.website_url + "cart/add.js"
         contents, file = self.post(
             url,
             data_j = dict(
                 id = id,
-                quantity = quantity
+                quantity = quantity,
+                properties = properties
             ),
             handle = True
         )
-        self._handle_cookie(file)
+        if not hasattr(self, "cart"): self._handle_cookie(file)
         return contents
 
     def _handle_cookie(self, file):
