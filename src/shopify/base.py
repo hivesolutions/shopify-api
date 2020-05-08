@@ -127,9 +127,14 @@ class API(
         })
         return contents
 
-    def verify_request(self, request, header = "X-Shopify-Hmac-SHA256"):
-        signature = request.get_header(header, "")
-        if not signature: return
+    def verify_request(self, request, field = "hmac", header = "X-Shopify-Hmac-SHA256"):
+        signature = request.get_param(field, None)
+        signature = request.get_header(header, signature)
+        appier.verify(
+            signature,
+            message = "No signature found in request",
+            exception = appier.OperationalError
+        )
 
         data = request.get_data()
         self.verify_signature(signature, data)
