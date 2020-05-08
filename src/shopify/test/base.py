@@ -60,3 +60,11 @@ class APITest(unittest.TestCase):
             appier.SecurityError,
             lambda: api.verify_signature("0AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world")
         )
+
+        result = api.verify_signature("f805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617", b"hello world", base_64 = False)
+        self.assertEqual(result, None)
+
+        self.assertRaises(
+            appier.SecurityError,
+            lambda: api.verify_signature("d805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617", b"hello world", base_64 = False)
+        )
