@@ -127,7 +127,13 @@ class API(
         })
         return contents
 
-    def verify_request(self, request, field = "hmac", header = "X-Shopify-Hmac-SHA256"):
+    def verify_request(
+        self,
+        request,
+        field = "hmac",
+        header = "X-Shopify-Hmac-SHA256"
+    ):
+        is_param = True if request.get_param(field, None) else False
         signature = request.get_param(field, None)
         signature = request.get_header(header, signature)
         appier.verify(
@@ -136,7 +142,13 @@ class API(
             exception = appier.OperationalError
         )
 
-        data = request.get_data()
+        if is_param:
+            params_l = [(key, param[0]) for key, param in appier.legacy.iteritems(request.get_params()) if not key == "hmac"]
+            params_l.sort()
+            data = "&".join(["%s=%s" % (appier.legacy.urlencode(key), appier.legacy.urlencode(value)) for key, value in params_l])
+        else:
+            data = request.get_data()
+
         self.verify_signature(signature, data)
 
     def verify_signature(self, signature, data, key = None):
@@ -152,7 +164,6 @@ class API(
 
         digest = hmac.new(key_b, data, hashlib.sha256).digest()
         digest_b64 = base64.b64encode(digest)
-        digest_b64 = appier.legacy.str(digest_b64)
 
         valid = hmac.compare_digest(digest_b64, signature_b)
 
