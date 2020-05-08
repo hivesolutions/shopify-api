@@ -163,8 +163,9 @@ class API(
         signature_b = appier.legacy.bytes(signature)
         key_b = appier.legacy.bytes(key)
 
-        digest = hmac.new(key_b, data, hashlib.sha256).hexdigest()
-        valid = hmac.compare_digest(digest, signature_b)
+        _signature = hmac.new(key_b, data, hashlib.sha256).hexdigest()
+        _signature_b = appier.legacy.bytes(_signature)
+        valid = hmac.compare_digest(_signature_b, signature_b)
 
         appier.verify(
             valid,
