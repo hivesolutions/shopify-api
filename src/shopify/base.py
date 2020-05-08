@@ -150,9 +150,9 @@ class API(
         else:
             data = request.get_data()
 
-        self.verify_signature(signature, data)
+        self.verify_signature(signature, data, base_64 = not is_param)
 
-    def verify_signature(self, signature, data, key = None):
+    def verify_signature(self, signature, data, key = None, base_64 = True):
         key = key if key else self.secret
         appier.verify(
             key,
@@ -163,9 +163,14 @@ class API(
         signature_b = appier.legacy.bytes(signature)
         key_b = appier.legacy.bytes(key)
 
-        _signature = hmac.new(key_b, data, hashlib.sha256).hexdigest()
-        _signature_b = appier.legacy.bytes(_signature)
-        valid = hmac.compare_digest(_signature_b, signature_b)
+        if base_64:
+            _signature = hmac.new(key_b, data, hashlib.sha256).digest()
+            _signature_b64 = base64.b64encode(_signature)
+            valid = hmac.compare_digest(_signature_b64, signature_b)
+        else:
+            _signature = hmac.new(key_b, data, hashlib.sha256).hexdigest()
+            _signature_b = appier.legacy.bytes(_signature)
+            valid = hmac.compare_digest(_signature_b, signature_b)
 
         appier.verify(
             valid,
