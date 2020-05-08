@@ -156,7 +156,7 @@ class API(
         key = key if key else self.secret
         appier.verify(
             key,
-            message = "No key found",
+            message = "No key for signing found",
             exception = appier.OperationalError
         )
 
