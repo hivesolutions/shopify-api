@@ -145,7 +145,8 @@ class API(
         if is_param:
             params_l = [(key, param) for key, param in appier.legacy.iteritems(request.get_params()) if not key == field]
             params_l.sort()
-            data = appier.legacy.urlencode(params_l)
+            params_s = appier.legacy.urlencode(params_l)
+            data = appier.legacy.bytes(params_s, encoding = "utf-8", force = True)
         else:
             data = request.get_data()
 
