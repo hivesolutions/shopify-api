@@ -37,7 +37,11 @@ __copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
+import hmac
 import appier
+import base64
+import hashlib
+import shopify
 
 from . import cart
 from . import order
@@ -104,6 +108,22 @@ class API(
         cookie = ";".join(cookie_l)
         if not cookie: return
         headers["Cookie"] = cookie
+
+    def check_request(self, request, signature = None):
+        hmac_header = request.get_header("X-Shopify-Hmac-SHA256", "")
+        if not hmac_header: return
+
+        signature = signature if signature else self.secret
+        if not signature: raise appier.OperationalError(message = "No signature provided")
+
+        hmac_header_b = bytes(hmac_header, "utf-8")
+        signature_b = bytes(signature, "utf-8")
+        request_data = request.get_data()
+        digest = hmac.new(signature_b, request_data, hashlib.sha256).digest()
+        computed_hmac = base64.b64encode(digest)
+        valid = hmac.compare_digest(computed_hmac, hmac_header_b)
+
+        if not valid: raise appier.OperationalError(message = "Request signature is not valid")
 
     def get_many(self, url, key = None, **kwargs):
             page = 1
