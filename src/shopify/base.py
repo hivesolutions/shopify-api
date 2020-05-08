@@ -201,7 +201,6 @@ class OAuthAPI(appier.OAuth2API, API):
         self.scope = kwargs.get("scope", SCOPE)
         self.access_token = kwargs.get("access_token", None)
         self.access_mode = kwargs.get("access_mode", None)
-        self.client_secret = self.secret
         self._build_url()
 
     def oauth_authorize(self, state = None):
@@ -230,6 +229,10 @@ class OAuthAPI(appier.OAuth2API, API):
         self.access_token = contents["access_token"]
         self.trigger("access_token", self.access_token)
         return self.access_token
+
+    @property
+    def client_secret(self):
+        return self.secret
 
     def _build_url(self):
         if not self.store_url:
