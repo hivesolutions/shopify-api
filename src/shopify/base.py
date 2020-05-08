@@ -41,7 +41,6 @@ import hmac
 import appier
 import base64
 import hashlib
-import shopify
 
 from . import cart
 from . import order
@@ -109,22 +108,6 @@ class API(
         if not cookie: return
         headers["Cookie"] = cookie
 
-    def check_request(self, request, signature = None):
-        hmac_header = request.get_header("X-Shopify-Hmac-SHA256", "")
-        if not hmac_header: return
-
-        signature = signature if signature else self.secret
-        if not signature: raise appier.OperationalError(message = "No signature provided")
-
-        hmac_header_b = bytes(hmac_header, "utf-8")
-        signature_b = bytes(signature, "utf-8")
-        request_data = request.get_data()
-        digest = hmac.new(signature_b, request_data, hashlib.sha256).digest()
-        computed_hmac = base64.b64encode(digest)
-        valid = hmac.compare_digest(computed_hmac, hmac_header_b)
-
-        if not valid: raise appier.OperationalError(message = "Request signature is not valid")
-
     def get_many(self, url, key = None, **kwargs):
             page = 1
             result = []
@@ -139,8 +122,40 @@ class API(
 
     def graphql(self, query_data):
         url = self.base_url + "admin/api/graphql.json"
-        contents = self.post(url = url, data = query_data, headers = { "Content-Type": "application/graphql" })
+        contents = self.post(url = url, data = query_data, headers = {
+            "Content-Type" : "application/graphql"
+        })
         return contents
+
+    def verify_request(self, request, header = "X-Shopify-Hmac-SHA256"):
+        signature = request.get_header(header, "")
+        if not signature: return
+
+        data = request.get_data()
+        self.verify_signature(signature, data)
+
+    def verify_signature(self, signature, data, key = None):
+        key = key if key else self.secret
+        appier.verify(
+            key,
+            message = "No key found",
+            exception = appier.OperationalError
+        )
+
+        signature_b = appier.legacy.bytes(signature)
+        key_b = appier.legacy.bytes(key)
+
+        digest = hmac.new(key_b, data, hashlib.sha256).digest()
+        digest_b64 = base64.b64encode(digest)
+        digest_b64 = appier.legacy.str(digest_b64)
+
+        valid = hmac.compare_digest(digest_b64, signature_b)
+
+        appier.verify(
+            valid,
+            message = "Request signature is not valid",
+            exception = appier.SecurityError
+        )
 
     def _build_url(self):
         if not self.api_key:
