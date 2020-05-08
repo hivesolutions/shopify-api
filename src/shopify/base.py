@@ -201,6 +201,7 @@ class OAuthAPI(appier.OAuth2API, API):
         self.scope = kwargs.get("scope", SCOPE)
         self.access_token = kwargs.get("access_token", None)
         self.access_mode = kwargs.get("access_mode", None)
+        self.client_secret = self.secret
         self._build_url()
 
     def oauth_authorize(self, state = None):
