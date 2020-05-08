@@ -189,12 +189,13 @@ class OAuthAPI(appier.OAuth2API, API):
 
     def __init__(self, *args, **kwargs):
         appier.OAuth2API.__init__(self, *args, **kwargs)
+        API.__init__(self, *args, **kwargs)
         self.client_id = appier.conf("SHOPIFY_ID", CLIENT_ID)
-        self.client_secret = appier.conf("SHOPIFY_SECRET", CLIENT_SECRET)
+        self.secret = appier.conf("SHOPIFY_SECRET", CLIENT_SECRET)
         self.redirect_url = appier.conf("SHOPIFY_REDIRECT_URL", REDIRECT_URL)
         self.store_url = appier.conf("SHOPIFY_STORE", None)
         self.client_id = kwargs.get("client_id", self.client_id)
-        self.client_secret = kwargs.get("client_secret", self.client_secret)
+        self.secret = kwargs.get("secret", self.secret)
         self.redirect_url = kwargs.get("redirect_url", self.redirect_url)
         self.store_url = kwargs.get("store_url", self.store_url)
         self.scope = kwargs.get("scope", SCOPE)
