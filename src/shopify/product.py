@@ -37,6 +37,9 @@ __copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
+import appier
+import base64
+
 class ProductAPI(object):
 
     def list_products(self, *args, **kwargs):
@@ -71,6 +74,20 @@ class ProductAPI(object):
             **kwargs
         )
         return contents["images"]
+
+    def create_image_product(self, id, *args, attachment = True, **kwargs):
+        if attachment:
+            src = kwargs.pop("src", None)
+            if src:
+                content = appier.get(src)
+                kwargs["attachment"] = base64.b64encode(content).decode("ascii")
+        image = dict(kwargs)
+        url = self.base_url + "admin/products/%d/images.json" % id
+        contents = self.post(
+            url,
+            data_j = dict(image = image)
+        )
+        return contents["image"]
 
     def metafields_product(self, id, *args, **kwargs):
         url = self.base_url + "admin/products/%d/metafields.json" % id
