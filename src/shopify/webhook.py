@@ -41,19 +41,12 @@ class WebhookAPI(object):
 
     def list_webhooks(self, *args, **kwargs):
         url = self.base_url + "admin/webhooks.json"
-        contents = self.get(
-            url,
-            **kwargs
-        )
+        contents = self.get(url, **kwargs)
         return contents["webhooks"]
 
-    def create_webhook(self, **kwargs):
-        webhook = dict(kwargs)
+    def create_webhook(self, payload):
         url = self.base_url + "admin/webhooks.json"
-        contents = self.post(
-            url,
-            data_j = dict(webhook = webhook)
-        )
+        contents = self.post(url, data_j = payload)
         return contents["webhook"]
 
     def get_webhook(self, id):
@@ -61,14 +54,9 @@ class WebhookAPI(object):
         contents = self.get(url)
         return contents["webhook"]
 
-    def update_webhook(self, id, **kwargs):
-        webhook = dict(kwargs)
-        webhook["id"] = str(id)
+    def update_webhook(self, id, payload):
         url = self.base_url + "admin/webhooks/%d.json" % id
-        contents = self.put(
-            url,
-            data_j = dict(webhook = webhook)
-        )
+        contents = self.put(url, data_j = payload)
         return contents["webhook"]
 
     def delete_webhook(self, id):
