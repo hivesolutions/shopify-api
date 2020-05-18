@@ -56,9 +56,9 @@ class SmartCollectionAPI(object):
         )
         return contents["smart_collections"]
 
-    def create_smart_collection(self, payload):
+    def create_smart_collection(self, smart_collection):
         url = self.base_url + "admin/smart_collections.json"
-        contents = self.post(url, data_j = payload)
+        contents = self.post(url, data_j = dict(smart_collection = smart_collection))
         return contents["smart_collection"]
 
     def get_smart_collection(self, id):
@@ -66,9 +66,9 @@ class SmartCollectionAPI(object):
         contents = self.get(url)
         return contents["smart_collection"]
 
-    def update_smart_collection(self, id, payload):
+    def update_smart_collection(self, id, smart_collection):
         url = self.base_url + "admin/smart_collections/%d.json" % id
-        contents = self.put(url, data_j = payload)
+        contents = self.put(url, data_j = dict(smart_collection = smart_collection))
         return contents["smart_collection"]
 
     def delete_smart_collection(self, id):

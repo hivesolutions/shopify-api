@@ -64,11 +64,11 @@ class ProductAPI(object):
         )
         return contents["count"]
 
-    def create_product(self, payload):
+    def create_product(self, product):
         url = self.base_url + "admin/products.json"
         contents = self.post(
             url,
-            data_j = payload
+            data_j = dict(product = product)
         )
         return contents["product"]
 
@@ -85,9 +85,9 @@ class ProductAPI(object):
         )
         return contents["images"]
 
-    def create_image_product(self, id, payload):
+    def create_image_product(self, id, image):
         url = self.base_url + "admin/products/%d/images.json" % id
-        contents = self.post(url, data_j = payload)
+        contents = self.post(url, data_j = dict(image = image))
         return contents["image"]
 
     def metafields_product(self, id, *args, **kwargs):
