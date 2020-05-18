@@ -37,8 +37,6 @@ __copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-import appier
-
 class ProductAPI(object):
 
     def list_products(self, *args, **kwargs):
@@ -66,12 +64,11 @@ class ProductAPI(object):
         )
         return contents["count"]
 
-    def create_product(self, **kwargs):
-        product = dict(kwargs)
+    def create_product(self, payload):
         url = self.base_url + "admin/products.json"
         contents = self.post(
             url,
-            data_j = dict(product = product)
+            data_j = payload
         )
         return contents["product"]
 
