@@ -98,7 +98,7 @@ class ProductAPI(object):
         )
         return contents["metafields"]
 
-    def create_metafield_product(self, id, key, value, type = "string", namespace = "global"):
+    def create_metafield_product(self, id, key, value, value_type = "string", namespace = "global"):
         url = self.base_url + "admin/products/%d/metafields.json" % id
         contents = self.post(
             url,
@@ -107,7 +107,7 @@ class ProductAPI(object):
                     namespace = namespace,
                     key = key,
                     value = value,
-                    value_type = type
+                    value_type = value_type
                 )
             )
         )
