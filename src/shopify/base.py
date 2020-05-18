@@ -45,6 +45,7 @@ import hashlib
 from . import cart
 from . import order
 from . import product
+from . import smart_collection
 from . import webhook
 
 CLIENT_ID = None
@@ -71,6 +72,7 @@ class API(
     cart.CartAPI,
     order.OrderAPI,
     product.ProductAPI,
+    smart_collection.SmartCollectionAPI,
     webhook.WebhookAPI
 ):
 

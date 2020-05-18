@@ -38,10 +38,12 @@ from . import base
 from . import cart
 from . import order
 from . import product
+from . import smart_collection
 from . import webhook
 
 from .base import API, OAuthAPI
 from .cart import CartAPI
 from .order import OrderAPI
 from .product import ProductAPI
+from .smart_collection import SmartCollectionAPI
 from .webhook import WebhookAPI

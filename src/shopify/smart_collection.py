@@ -37,28 +37,40 @@ __copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-class WebhookAPI(object):
+class SmartCollectionAPI(object):
 
-    def list_webhooks(self, *args, **kwargs):
-        url = self.base_url + "admin/webhooks.json"
-        contents = self.get(url, **kwargs)
-        return contents["webhooks"]
+    def list_smart_collections(self, *args, **kwargs):
+        url = self.base_url + "admin/smart_collections.json"
+        contents = self.get(
+            url,
+            **kwargs
+        )
+        return contents["smart_collections"]
 
-    def create_webhook(self, payload):
-        url = self.base_url + "admin/webhooks.json"
+    def many_smart_collections(self, *args, **kwargs):
+        url = self.base_url + "admin/smart_collections.json"
+        contents = self.get_many(
+            url,
+            key = "smart_collections",
+            **kwargs
+        )
+        return contents["smart_collections"]
+
+    def create_smart_collection(self, payload):
+        url = self.base_url + "admin/smart_collections.json"
         contents = self.post(url, data_j = payload)
-        return contents["webhook"]
+        return contents["smart_collection"]
 
-    def get_webhook(self, id):
-        url = self.base_url + "admin/webhooks/%d.json" % id
+    def get_smart_collection(self, id):
+        url = self.base_url + "admin/smart_collections/%d.json" % id
         contents = self.get(url)
-        return contents["webhook"]
+        return contents["smart_collection"]
 
-    def update_webhook(self, id, payload):
-        url = self.base_url + "admin/webhooks/%d.json" % id
+    def update_smart_collection(self, id, payload):
+        url = self.base_url + "admin/smart_collections/%d.json" % id
         contents = self.put(url, data_j = payload)
-        return contents["webhook"]
+        return contents["smart_collection"]
 
-    def delete_webhook(self, id):
-        url = self.base_url + "admin/webhooks/%d.json" % id
+    def delete_smart_collection(self, id):
+        url = self.base_url + "admin/smart_collections/%d.json" % id
         self.delete(url)
