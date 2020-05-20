@@ -90,6 +90,10 @@ class ProductAPI(object):
         contents = self.post(url, data_j = dict(image = image))
         return contents["image"]
 
+    def delete_image_product(self, id, image_id):
+        url = self.base_url + "admin/products/%d/images/%d.json" % (id, image_id)
+        self.delete(url)
+
     def metafields_product(self, id, *args, **kwargs):
         url = self.base_url + "admin/products/%d/metafields.json" % id
         contents = self.get(
