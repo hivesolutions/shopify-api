@@ -41,10 +41,7 @@ class ProductAPI(object):
 
     def list_products(self, *args, **kwargs):
         url = self.base_url + "admin/products.json"
-        contents = self.get(
-            url,
-            **kwargs
-        )
+        contents = self.get(url, **kwargs)
         return contents["products"]
 
     def many_products(self, *args, **kwargs):
@@ -58,10 +55,7 @@ class ProductAPI(object):
 
     def count_products(self, *args, **kwargs):
         url = self.base_url + "admin/products/count.json"
-        contents = self.get(
-            url,
-            **kwargs
-        )
+        contents = self.get(url, **kwargs)
         return contents["count"]
 
     def create_product(self, product):
@@ -79,10 +73,7 @@ class ProductAPI(object):
 
     def images_product(self, id, *args, **kwargs):
         url = self.base_url + "admin/products/%d/images.json" % id
-        contents = self.get(
-            url,
-            **kwargs
-        )
+        contents = self.get(url, **kwargs)
         return contents["images"]
 
     def create_image_product(self, id, image):
@@ -96,10 +87,7 @@ class ProductAPI(object):
 
     def metafields_product(self, id, *args, **kwargs):
         url = self.base_url + "admin/products/%d/metafields.json" % id
-        contents = self.get(
-            url,
-            **kwargs
-        )
+        contents = self.get(url, **kwargs)
         return contents["metafields"]
 
     def create_metafield_product(self, id, key, value, value_type = "string", namespace = "global"):

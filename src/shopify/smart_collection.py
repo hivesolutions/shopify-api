@@ -41,10 +41,7 @@ class SmartCollectionAPI(object):
 
     def list_smart_collections(self, *args, **kwargs):
         url = self.base_url + "admin/smart_collections.json"
-        contents = self.get(
-            url,
-            **kwargs
-        )
+        contents = self.get(url, **kwargs)
         return contents["smart_collections"]
 
     def many_smart_collections(self, *args, **kwargs):

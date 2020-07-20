@@ -41,10 +41,7 @@ class OrderAPI(object):
 
     def list_orders(self, *args, **kwargs):
         url = self.base_url + "admin/orders.json"
-        contents = self.get(
-            url,
-            **kwargs
-        )
+        contents = self.get(url, **kwargs)
         return contents["orders"]
 
     def get_order(self, id):
