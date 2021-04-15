@@ -71,6 +71,10 @@ class ProductAPI(object):
         contents = self.get(url)
         return contents["product"]
 
+    def delete_product(self, id):
+        url = self.base_url + "admin/products/%d.json" % id
+        self.delete(url)
+
     def images_product(self, id, *args, **kwargs):
         url = self.base_url + "admin/products/%d/images.json" % id
         contents = self.get(url, **kwargs)
