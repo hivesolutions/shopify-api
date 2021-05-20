@@ -45,6 +45,7 @@ import hashlib
 from . import cart
 from . import order
 from . import product
+from . import shop
 from . import smart_collection
 from . import webhook
 
@@ -70,6 +71,7 @@ scope string for the OAuth value """
 class API(
     appier.API,
     cart.CartAPI,
+    shop.ShopAPI,
     order.OrderAPI,
     product.ProductAPI,
     smart_collection.SmartCollectionAPI,
