@@ -83,3 +83,12 @@ class OrderAPI(object):
                 email = email
             )
         )
+
+    def fulfill_order(self, id, location_id, **kwargs):
+        fulfillment = dict(kwargs)
+        fulfillment["location_id"] = location_id
+        url = self.base_url + "admin/orders/%d/fulfillments.json" % id
+        self.post(
+            url,
+            data_j = dict(fulfillment = fulfillment)
+        )
