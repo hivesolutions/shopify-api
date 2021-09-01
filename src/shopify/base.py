@@ -38,17 +38,18 @@ __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
 import hmac
-import appier
 import base64
 import hashlib
 
+import appier
+
 from . import cart
-from . import location
+from . import shop
 from . import order
 from . import product
-from . import shop
-from . import smart_collection
 from . import webhook
+from . import location
+from . import smart_collection
 
 CLIENT_ID = None
 """ The default value to be used for the client id
@@ -73,11 +74,11 @@ class API(
     appier.API,
     cart.CartAPI,
     shop.ShopAPI,
-    location.LocationAPI,
     order.OrderAPI,
     product.ProductAPI,
-    smart_collection.SmartCollectionAPI,
-    webhook.WebhookAPI
+    webhook.WebhookAPI,
+    location.LocationAPI,
+    smart_collection.SmartCollectionAPI
 ):
 
     def __init__(self, *args, **kwargs):
