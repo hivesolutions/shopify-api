@@ -43,6 +43,7 @@ import base64
 import hashlib
 
 from . import cart
+from . import location
 from . import order
 from . import product
 from . import shop
@@ -72,6 +73,7 @@ class API(
     appier.API,
     cart.CartAPI,
     shop.ShopAPI,
+    location.LocationAPI,
     order.OrderAPI,
     product.ProductAPI,
     smart_collection.SmartCollectionAPI,

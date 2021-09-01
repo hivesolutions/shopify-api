@@ -19,6 +19,9 @@
 # You should have received a copy of the Apache License along with
 # Hive Shopify API. If not, see <http://www.apache.org/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,12 +37,9 @@ __copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-from . import app
-from . import base
-from . import cart
-from . import location
-from . import order
-from . import product
+class LocationAPI(object):
 
-from .app import ShopifyApp
-from .base import get_api, get_oauth_api
+    def list_locations(self, *args, **kwargs):
+        url = self.base_url + "admin/locations.json"
+        contents = self.get(url, **kwargs)
+        return contents["locations"]
