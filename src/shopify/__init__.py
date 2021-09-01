@@ -36,6 +36,7 @@ __license__ = "Apache License, Version 2.0"
 
 from . import base
 from . import cart
+from . import location
 from . import order
 from . import product
 from . import shop
@@ -44,6 +45,7 @@ from . import webhook
 
 from .base import API, OAuthAPI
 from .cart import CartAPI
+from .location import LocationAPI
 from .order import OrderAPI
 from .product import ProductAPI
 from .shop import ShopAPI
