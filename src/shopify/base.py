@@ -44,6 +44,7 @@ import hashlib
 import appier
 
 from . import cart
+from . import inventory_item
 from . import shop
 from . import order
 from . import product
@@ -73,6 +74,7 @@ scope string for the OAuth value """
 class API(
     appier.API,
     cart.CartAPI,
+    inventory_item.InventoryItemAPI,
     shop.ShopAPI,
     order.OrderAPI,
     product.ProductAPI,

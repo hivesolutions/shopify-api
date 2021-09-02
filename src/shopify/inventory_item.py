@@ -19,6 +19,9 @@
 # You should have received a copy of the Apache License along with
 # Hive Shopify API. If not, see <http://www.apache.org/licenses/>.
 
+__author__ = "João Magalhães <joamag@hive.pt>"
+""" The author(s) of the module """
+
 __version__ = "1.0.0"
 """ The version of the module """
 
@@ -34,22 +37,19 @@ __copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-from . import base
-from . import cart
-from . import inventory_item
-from . import location
-from . import order
-from . import product
-from . import shop
-from . import smart_collection
-from . import webhook
+class InventoryItemAPI(object):
 
-from .base import API, OAuthAPI
-from .cart import CartAPI
-from .inventory_item import InventoryItemAPI
-from .location import LocationAPI
-from .order import OrderAPI
-from .product import ProductAPI
-from .shop import ShopAPI
-from .smart_collection import SmartCollectionAPI
-from .webhook import WebhookAPI
+    def list_inventory_items(self, *args, **kwargs):
+        url = self.base_url + "admin/inventory_items.json"
+        contents = self.get(url, **kwargs)
+        return contents["inventory_items"]
+
+    def get_inventory_item(self, id):
+        url = self.base_url + "admin/inventory_items/%d.json" % id
+        contents = self.get(url)
+        return contents["inventory_item"]
+
+    def update_inventory_item(self, id, inventory_item):
+        url = self.base_url + "admin/inventory_items/%d.json" % id
+        contents = self.put(url, data_j = dict(inventory_item = inventory_item))
+        return contents["inventory_item"]
