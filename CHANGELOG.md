@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Inventory Item API
+*
 
 ### Changed
 
@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.4.0] - 2021-09-03
+
+### Added
+
+* Inventory Item API
 
 ## [0.3.1] - 2021-09-01
 
