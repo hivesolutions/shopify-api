@@ -92,3 +92,23 @@ class OrderAPI(object):
             url,
             data_j = dict(fulfillment = fulfillment)
         )
+
+    def metafields_order(self, id, *args, **kwargs):
+        url = self.base_url + "admin/orders/%d/metafields.json" % id
+        contents = self.get(url, **kwargs)
+        return contents["metafields"]
+
+    def create_metafield_order(self, id, key, value, value_type = "string", namespace = "global"):
+        url = self.base_url + "admin/orders/%d/metafields.json" % id
+        contents = self.post(
+            url,
+            data_j = dict(
+                metafield = dict(
+                    namespace = namespace,
+                    key = key,
+                    value = value,
+                    value_type = value_type
+                )
+            )
+        )
+        return contents["metafield"]
