@@ -42,7 +42,7 @@ import setuptools
 
 setuptools.setup(
     name = "shopify_api",
-    version = "0.4.0",
+    version = "0.5.0",
     author = "Hive Solutions Lda.",
     author_email = "development@hive.pt",
     description = "Shopify API Client",
