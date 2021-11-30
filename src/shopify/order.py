@@ -64,7 +64,10 @@ class OrderAPI(object):
                 **kwargs
             )
             orders.extend(contents["orders"])
-            last_id = orders[-1]["id"]
+            try:
+                last_id = orders[-1]["id"]
+            except:
+                return []
             orders_count -= limit
 
         return orders
