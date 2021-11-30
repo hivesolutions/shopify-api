@@ -39,10 +39,35 @@ __license__ = "Apache License, Version 2.0"
 
 class OrderAPI(object):
 
-    def list_orders(self, *args, **kwargs):
-        url = self.base_url + "admin/orders.json"
+    def get_orders_count(self, *args, **kwargs):
+        url = self.base_url + "admin/orders/count.json"
         contents = self.get(url, **kwargs)
-        return contents["orders"]
+        return contents["count"]
+
+    def list_orders(self, all = True, limit = 50, **kwargs):
+        url = self.base_url + "admin/orders.json"
+        orders = []
+        last_id = None
+        orders_count = limit
+
+        if all:
+            limit = 250
+            last_id = 0
+            orders_count = self.get_orders_count()
+
+        # keep fetching orders until it reached the wanted limit
+        while orders_count > 0:
+            contents = self.get(
+                url,
+                limit = limit,
+                since_id = last_id,
+                **kwargs
+            )
+            orders.extend(contents["orders"])
+            last_id = orders[-1]["id"]
+            orders_count -= limit
+
+        return orders
 
     def get_order(self, id):
         url = self.base_url + "admin/orders/%d.json" % id
