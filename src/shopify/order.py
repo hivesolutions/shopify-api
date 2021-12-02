@@ -39,46 +39,24 @@ __license__ = "Apache License, Version 2.0"
 
 class OrderAPI(object):
 
-    def get_orders_count(self, *args, **kwargs):
-        url = self.base_url + "admin/orders/count.json"
-        contents = self.get(url, **kwargs)
-        return contents["count"]
-
-    def list_orders(self, all = True, limit = 50, **kwargs):
+    def list_orders(self, *args, **kwargs):
         url = self.base_url + "admin/orders.json"
-        orders = []
-        last_id = None
-        orders_count = limit
+        contents = self.get(url, **kwargs)
+        return contents["orders"]
+
+    def list_orders_a(self, all = True, orders_count = 50, limit = 50, **kwargs):
+        url = self.base_url + "admin/orders.json"
 
         # if "all" flag is set to true then set the "limit" to the maximum
         # allowed value (250) and set "order_count" with the total number
         # of existing orders
         if all:
             limit = 250
-            orders_count = self.get_orders_count()
+            orders_count = self.count_orders()
 
-        # keep fetching orders until there isn't any more orders to fetch
-        while orders_count > 0:
-            contents = self.get(
-                url,
-                limit = limit,
-                since_id = last_id,
-                **kwargs
-            )
-            orders.extend(contents["orders"])
-            try:
-                last_id = orders[-1]["id"]
-            except:
-                return []
-            orders_count -= limit
-
-        return orders
-
-    def list_orders_a(self, all = True, limit = 50, **kwargs):
-        url = self.base_url + "admin/orders.json"
         orders = self._fetch_many(
             url,
-            method_count = self.get_orders_count,
+            orders_count = orders_count,
             limit = limit,
             **kwargs
         )
@@ -158,17 +136,9 @@ class OrderAPI(object):
         )
         return contents["metafield"]
 
-    def _fetch_many(self, url, method_count = None, limit = 50, **kwargs):
+    def _fetch_many(self, url, orders_count = 50, limit = 50, **kwargs):
         orders = []
         last_id = None
-        orders_count = limit
-
-        # if "all" flag is set to true then set the "limit" to the maximum
-        # allowed value (250) and set "order_count" with the total number
-        # of existing orders
-        if all:
-            limit = 250
-            orders_count = method_count()
 
         # keep fetching orders until there isn't any more orders to fetch
         while orders_count > 0:
@@ -184,3 +154,5 @@ class OrderAPI(object):
             except:
                 return []
             orders_count -= limit
+
+        return orders
