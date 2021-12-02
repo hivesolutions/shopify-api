@@ -50,12 +50,14 @@ class OrderAPI(object):
         last_id = None
         orders_count = limit
 
+        # if "all" flag is set to true then set the "limit" to the maximum
+        # allowed value (250) and set "order_count" with the total number
+        # of existing orders
         if all:
             limit = 250
-            last_id = 0
             orders_count = self.get_orders_count()
 
-        # keep fetching orders until it reached the wanted limit
+        # keep fetching orders until there isn't any more orders to fetch
         while orders_count > 0:
             contents = self.get(
                 url,
