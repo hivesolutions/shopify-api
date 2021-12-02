@@ -13,11 +13,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* Created the `list_orders_a` for advanced listing of orders
+*
 
 ### Fixed
 
 *
+
+## [0.6.0] - 2021-12-02
+
+### Changed
+
+* Created the `list_orders_a` for advanced listing of orders
 
 ## [0.5.0] - 2021-11-12
 
