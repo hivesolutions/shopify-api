@@ -49,6 +49,11 @@ class OrderAPI(object):
         contents = self.get(url)
         return contents["order"]
 
+    def count_orders(self, *args, **kwargs):
+        url = self.base_url + "admin/orders/count.json"
+        contents = self.get(url, **kwargs)
+        return contents["count"]
+
     def transactions_order(self, id):
         url = self.base_url + "admin/orders/%d/transactions.json" % id
         contents = self.get(url)
