@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* Add `get_orders_count` that returns the number of existing Shopify orders
 
 ### Changed
 
-*
+* Improve `list_orders` by making return all the existing Shopify orders
 
 ### Fixed
 
