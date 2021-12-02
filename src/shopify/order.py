@@ -51,8 +51,8 @@ class OrderAPI(object):
         # allowed value (250) and set "order_count" with the total number
         # of existing orders
         if all:
-            limit = 250
             orders_count = self.count_orders()
+            limit = 250
 
         orders = self._fetch_many(
             url,
