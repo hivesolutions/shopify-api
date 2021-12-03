@@ -44,12 +44,13 @@ class OrderAPI(object):
         contents = self.get(url, **kwargs)
         return contents["orders"]
 
-    def list_orders_a(self, all = True, limit = 50, **kwargs):
+    def list_orders_a(self, limit = 50, all = True, **kwargs):
         url = self.base_url + "admin/orders.json"
         orders = self._fetch_many(
             url,
             method_count = self.get_orders_count,
             limit = limit,
+            all = all,
             **kwargs
         )
         return orders
@@ -127,30 +128,3 @@ class OrderAPI(object):
             )
         )
         return contents["metafield"]
-
-    def _fetch_many(self, url, method_count = None, limit = 50, **kwargs):
-        orders = []
-        last_id = None
-        orders_count = limit
-
-        # if "all" flag is set to true then set the "limit" to the maximum
-        # allowed value (250) and set "order_count" with the total number
-        # of existing orders
-        if all:
-            limit = 250
-            orders_count = method_count()
-
-        # keep fetching orders until there isn't any more orders to fetch
-        while orders_count > 0:
-            contents = self.get(
-                url,
-                limit = limit,
-                since_id = last_id,
-                **kwargs
-            )
-            orders.extend(contents["orders"])
-            try:
-                last_id = orders[-1]["id"]
-            except:
-                return []
-            orders_count -= limit

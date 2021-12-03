@@ -252,3 +252,35 @@ class OAuthAPI(appier.OAuth2API, API):
         if not self.store_url:
             raise appier.OperationalError(message = "No store URL provided")
         self.base_url = "https://%s/" % self.store_url
+
+    def _fetch_many(self, url, method_count = None, limit = 50, all = False, **kwargs):
+        # creates the sequence that is going to hold the complete set of
+        # items to be retrieved from teh remote data source
+        items = []
+
+        # creates a variable to store the identifier of the last item that was
+        # retrieved, assumes this will allow proper pagination of the items
+        last_id = None
+
+        # sets the initial value of the items remaining to be fetched as the
+        # limit value, this value will change as the loop continues
+        item_remaining = limit
+
+        # if "all" flag is set to true then sets the the items remaining value
+        # to the value obtained method count method call
+        if all: item_remaining = method_count()
+
+        # keeps fetching items until there isn't any more items to fetch
+        while item_remaining > 0:
+            contents = self.get(
+                url,
+                limit = limit,
+                since_id = last_id,
+                **kwargs
+            )
+            items.extend(contents["items"])
+            try:
+                last_id = items[-1]["id"]
+            except:
+                return []
+            item_remaining -= limit
