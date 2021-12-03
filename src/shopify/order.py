@@ -49,7 +49,7 @@ class OrderAPI(object):
         orders = self._fetch_many(
             url,
             item_name = "orders",
-            method_count = self.get_orders_count,
+            method_count = self.count_orders,
             limit = limit,
             all = all,
             **kwargs
