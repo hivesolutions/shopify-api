@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-*
+* Fixed naming in the count_orders call
 
 ## [0.6.3] - 2021-12-03
 
