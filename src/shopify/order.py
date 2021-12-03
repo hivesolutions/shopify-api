@@ -48,6 +48,7 @@ class OrderAPI(object):
         url = self.base_url + "admin/orders.json"
         orders = self._fetch_many(
             url,
+            item_name = "orders",
             method_count = self.get_orders_count,
             limit = limit,
             all = all,

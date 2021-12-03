@@ -13,11 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-*
+* Added support for the `bulk_limit` parameter
 
 ### Fixed
 
-*
+* Dynamic support for items naming in the `_fetch_many()` method
 
 ## [0.6.1] - 2021-12-03
 
