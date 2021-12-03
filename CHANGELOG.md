@@ -13,11 +13,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* Improved the current `_fetch_many` solution
+*
 
 ### Fixed
 
 *
+
+## [0.6.1] - 2021-12-03
+
+### Changed
+
+* Improved the current `_fetch_many` solution
 
 ## [0.6.0] - 2021-12-02
 
