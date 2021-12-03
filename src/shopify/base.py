@@ -295,3 +295,7 @@ class OAuthAPI(appier.OAuth2API, API):
             except:
                 return []
             item_remaining -= limit
+
+        # returns the final set of items that have been retrieved from the
+        # remote data source according to the specification
+        return items
