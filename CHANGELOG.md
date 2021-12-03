@@ -13,6 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+*
+
+### Fixed
+
+*
+
+## [0.6.2] - 2021-12-03
+
+### Changed
+
 * Added support for the `bulk_limit` parameter
 
 ### Fixed
