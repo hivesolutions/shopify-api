@@ -86,11 +86,13 @@ class API(
     def __init__(self, *args, **kwargs):
         appier.API.__init__(self, *args, **kwargs)
         self.api_key = appier.conf("SHOPIFY_API_KEY", None)
+        self.api_version = appier.conf("SHOPIFY_API_VERSION", "2022-07")
         self.password = appier.conf("SHOPIFY_PASSWORD", None)
         self.secret = appier.conf("SHOPIFY_SECRET", None)
         self.store_url = appier.conf("SHOPIFY_STORE", None)
         self.website_url = appier.conf("SHOPIFY_WEBSITE", None)
         self.api_key = kwargs.get("api_key", self.api_key)
+        self.api_version = kwargs.get("api_version", self.api_version)
         self.password = kwargs.get("password", self.password)
         self.secret = kwargs.get("secret", self.secret)
         self.store_url = kwargs.get("store_url", self.store_url)
