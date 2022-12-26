@@ -115,7 +115,9 @@ class OrderAPI(object):
         contents = self.get(url, **kwargs)
         return contents["metafields"]
 
-    def create_metafield_order(self, id, key, value, value_type = "string", namespace = "global"):
+    def create_metafield_order(self, id, key, value, type = None, value_type = None, namespace = "global"):
+        type = type or value_type or "string"
+
         url = self.base_url + "admin/orders/%d/metafields.json" % id
         contents = self.post(
             url,
@@ -124,7 +126,7 @@ class OrderAPI(object):
                     namespace = namespace,
                     key = key,
                     value = value,
-                    value_type = value_type
+                    type = type
                 )
             )
         )
