@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Renamed metafield `value_type` as `type` due to Shopify deprecation
+* Renamed metafield `value_type` as `type` due to Shopify deprecation - [#19](https://github.com/hivesolutions/shopify-api/issues/19)
 
 ## [0.6.4] - 2021-12-03
 
