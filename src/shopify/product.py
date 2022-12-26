@@ -94,7 +94,9 @@ class ProductAPI(object):
         contents = self.get(url, **kwargs)
         return contents["metafields"]
 
-    def create_metafield_product(self, id, key, value, type = "string", namespace = "global"):
+    def create_metafield_product(self, id, key, value, type = None, value_type = None, namespace = "global"):
+        type = type or value_type or "string"
+
         url = self.base_url + "admin/products/%d/metafields.json" % id
         contents = self.post(
             url,
