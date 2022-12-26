@@ -117,7 +117,6 @@ class OrderAPI(object):
 
     def create_metafield_order(self, id, key, value, type = None, value_type = None, namespace = "global"):
         type = type or value_type or "string"
-
         url = self.base_url + "admin/orders/%d/metafields.json" % id
         contents = self.post(
             url,
