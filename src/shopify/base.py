@@ -85,11 +85,13 @@ class API(
 
     def __init__(self, *args, **kwargs):
         appier.API.__init__(self, *args, **kwargs)
+        self.api_version = appier.conf("SHOPIFY_API_VERSION", None)
         self.api_key = appier.conf("SHOPIFY_API_KEY", None)
         self.password = appier.conf("SHOPIFY_PASSWORD", None)
         self.secret = appier.conf("SHOPIFY_SECRET", None)
         self.store_url = appier.conf("SHOPIFY_STORE", None)
         self.website_url = appier.conf("SHOPIFY_WEBSITE", None)
+        self.api_version = kwargs.get("api_version", self.api_version)
         self.api_key = kwargs.get("api_key", self.api_key)
         self.password = kwargs.get("password", self.password)
         self.secret = kwargs.get("secret", self.secret)
@@ -198,6 +200,7 @@ class API(
             self.api_key, self.password, self.store_url
         )
         self.website_url = "http://%s/" % (self.website_url or self.store_url)
+        self.api_version_path = "api/%s" % (self.api_version or "") #################### 2023-01
 
 class OAuthAPI(appier.OAuth2API, API):
 

@@ -6,6 +6,7 @@ API client for the [Shopify](https://www.shopify.com) service.
 
 | Name                     | Type  | Default | Description                                                                                                |
 | ------------------------ | ----- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| **SHOPIFY_API_VERSION**  | `str` | `None`  | The Shopify API version to be used. Example: `2023-01`.                                                    |
 | **SHOPIFY_API_KEY**      | `str` | `None`  | The username/key to be used in the authentication with the Shopify API.                                    |
 | **SHOPIFY_PASSWORD**     | `str` | `None`  | The password to be used in the authentication with the Shopify API.                                        |
 | **SHOPIFY_SECRET**       | `str` | `None`  | The shared secret to be used for message validation with the Shopify API.                                  |
