@@ -188,10 +188,6 @@ class API(
             message = "Request signature is not valid",
             exception = appier.SecurityError
         )
-    
-    def _build_admin_url(self):
-        api_version_path = "api/%s/" % self.api_version if self.api_version else ""
-        return self.base_url + "admin/%s" % api_version_path
 
     def _build_url(self):
         if not self.api_key:
@@ -204,7 +200,8 @@ class API(
             self.api_key, self.password, self.store_url
         )
         self.website_url = "http://%s/" % (self.website_url or self.store_url)
-        self.admin_url = self._build_admin_url()
+        self.admin_url = self.base_url + "admin/%s" %\
+            ("api/%s/" % self.api_version if self.api_version else "")
 
 class OAuthAPI(appier.OAuth2API, API):
 
