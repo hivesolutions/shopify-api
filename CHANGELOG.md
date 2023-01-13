@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Add support for versioned admin endpoints
+*
 
 ### Changed
 
@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.7.0] - 2023-01-13
+
+### Added
+
+* Add support for versioned admin endpoints, using `SHOPIFY_API_VERSION`
 
 ## [0.6.5] - 2022-12-26
 
