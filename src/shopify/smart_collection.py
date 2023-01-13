@@ -40,12 +40,12 @@ __license__ = "Apache License, Version 2.0"
 class SmartCollectionAPI(object):
 
     def list_smart_collections(self, *args, **kwargs):
-        url = self.base_url + "admin/smart_collections.json"
+        url = self.admin_url + "smart_collections.json"
         contents = self.get(url, **kwargs)
         return contents["smart_collections"]
 
     def many_smart_collections(self, *args, **kwargs):
-        url = self.base_url + "admin/smart_collections.json"
+        url = self.admin_url + "smart_collections.json"
         contents = self.get_many(
             url,
             key = "smart_collections",
@@ -54,20 +54,20 @@ class SmartCollectionAPI(object):
         return contents["smart_collections"]
 
     def create_smart_collection(self, smart_collection):
-        url = self.base_url + "admin/smart_collections.json"
+        url = self.admin_url + "smart_collections.json"
         contents = self.post(url, data_j = dict(smart_collection = smart_collection))
         return contents["smart_collection"]
 
     def get_smart_collection(self, id):
-        url = self.base_url + "admin/smart_collections/%d.json" % id
+        url = self.admin_url + "smart_collections/%d.json" % id
         contents = self.get(url)
         return contents["smart_collection"]
 
     def update_smart_collection(self, id, smart_collection):
-        url = self.base_url + "admin/smart_collections/%d.json" % id
+        url = self.admin_url + "smart_collections/%d.json" % id
         contents = self.put(url, data_j = dict(smart_collection = smart_collection))
         return contents["smart_collection"]
 
     def delete_smart_collection(self, id):
-        url = self.base_url + "admin/smart_collections/%d.json" % id
+        url = self.admin_url + "smart_collections/%d.json" % id
         self.delete(url)

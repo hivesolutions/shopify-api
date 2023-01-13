@@ -40,25 +40,25 @@ __license__ = "Apache License, Version 2.0"
 class WebhookAPI(object):
 
     def list_webhooks(self, *args, **kwargs):
-        url = self.base_url + "admin/webhooks.json"
+        url = self.admin_url + "webhooks.json"
         contents = self.get(url, **kwargs)
         return contents["webhooks"]
 
     def create_webhook(self, webhook):
-        url = self.base_url + "admin/webhooks.json"
+        url = self.admin_url + "webhooks.json"
         contents = self.post(url, data_j = dict(webhook = webhook))
         return contents["webhook"]
 
     def get_webhook(self, id):
-        url = self.base_url + "admin/webhooks/%d.json" % id
+        url = self.admin_url + "webhooks/%d.json" % id
         contents = self.get(url)
         return contents["webhook"]
 
     def update_webhook(self, id, webhook):
-        url = self.base_url + "admin/webhooks/%d.json" % id
+        url = self.admin_url + "webhooks/%d.json" % id
         contents = self.put(url, data_j = dict(webhook = webhook))
         return contents["webhook"]
 
     def delete_webhook(self, id):
-        url = self.base_url + "admin/webhooks/%d.json" % id
+        url = self.admin_url + "webhooks/%d.json" % id
         self.delete(url)
