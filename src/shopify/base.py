@@ -259,7 +259,7 @@ class OAuthAPI(appier.OAuth2API, API):
         self.admin_url = self._build_admin_url()
 
     def _fetch_many(
-        self, 
+        self,
         url,
         item_name = None,
         method_count = None,
