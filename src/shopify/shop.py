@@ -40,6 +40,6 @@ __license__ = "Apache License, Version 2.0"
 class ShopAPI(object):
 
     def get_shop(self, *args, **kwargs):
-        url = self.base_url + "admin/shop.json"
+        url = self.admin_url + "shop.json"
         contents = self.get(url, **kwargs)
         return contents["shop"]

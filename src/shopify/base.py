@@ -85,11 +85,13 @@ class API(
 
     def __init__(self, *args, **kwargs):
         appier.API.__init__(self, *args, **kwargs)
+        self.api_version = appier.conf("SHOPIFY_API_VERSION", None)
         self.api_key = appier.conf("SHOPIFY_API_KEY", None)
         self.password = appier.conf("SHOPIFY_PASSWORD", None)
         self.secret = appier.conf("SHOPIFY_SECRET", None)
         self.store_url = appier.conf("SHOPIFY_STORE", None)
         self.website_url = appier.conf("SHOPIFY_WEBSITE", None)
+        self.api_version = kwargs.get("api_version", self.api_version)
         self.api_key = kwargs.get("api_key", self.api_key)
         self.password = kwargs.get("password", self.password)
         self.secret = kwargs.get("secret", self.secret)
@@ -186,6 +188,10 @@ class API(
             message = "Request signature is not valid",
             exception = appier.SecurityError
         )
+    
+    def _build_admin_url(self):
+        api_version_path = "api/%s/" % self.api_version if self.api_version else ""
+        return self.base_url + "admin/%s" % api_version_path
 
     def _build_url(self):
         if not self.api_key:
@@ -198,6 +204,7 @@ class API(
             self.api_key, self.password, self.store_url
         )
         self.website_url = "http://%s/" % (self.website_url or self.store_url)
+        self.admin_url = self._build_admin_url()
 
 class OAuthAPI(appier.OAuth2API, API):
 
@@ -252,6 +259,7 @@ class OAuthAPI(appier.OAuth2API, API):
         if not self.store_url:
             raise appier.OperationalError(message = "No store URL provided")
         self.base_url = "https://%s/" % self.store_url
+        self.admin_url = self._build_admin_url()
 
     def _fetch_many(
         self, 

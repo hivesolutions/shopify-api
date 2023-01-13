@@ -40,12 +40,12 @@ __license__ = "Apache License, Version 2.0"
 class OrderAPI(object):
 
     def list_orders(self, *args, **kwargs):
-        url = self.base_url + "admin/orders.json"
+        url = self.admin_url + "orders.json"
         contents = self.get(url, **kwargs)
         return contents["orders"]
 
     def list_orders_a(self, limit = 50, all = True, **kwargs):
-        url = self.base_url + "admin/orders.json"
+        url = self.admin_url + "orders.json"
         orders = self._fetch_many(
             url,
             item_name = "orders",
@@ -57,31 +57,31 @@ class OrderAPI(object):
         return orders
 
     def get_order(self, id):
-        url = self.base_url + "admin/orders/%d.json" % id
+        url = self.admin_url + "orders/%d.json" % id
         contents = self.get(url)
         return contents["order"]
 
     def count_orders(self, *args, **kwargs):
-        url = self.base_url + "admin/orders/count.json"
+        url = self.admin_url + "orders/count.json"
         contents = self.get(url, **kwargs)
         return contents["count"]
 
     def transactions_order(self, id):
-        url = self.base_url + "admin/orders/%d/transactions.json" % id
+        url = self.admin_url + "orders/%d/transactions.json" % id
         contents = self.get(url)
         return contents["transactions"]
 
     def update_order(self, id, **kwargs):
         order = dict(kwargs)
         order["id"] = str(id)
-        url = self.base_url + "admin/orders/%d.json" % id
+        url = self.admin_url + "orders/%d.json" % id
         self.put(
             url,
             data_j = dict(order = order)
         )
 
     def pay_order(self, id):
-        url = self.base_url + "admin/orders/%d/transactions.json" % id
+        url = self.admin_url + "orders/%d/transactions.json" % id
         self.post(
             url,
             data_j = dict(
@@ -92,7 +92,7 @@ class OrderAPI(object):
         )
 
     def cancel_order(self, id, restock = True, email = False):
-        url = self.base_url + "admin/orders/%d/cancel.json" % id
+        url = self.admin_url + "orders/%d/cancel.json" % id
         self.post(
             url,
             data_j = dict(
@@ -104,20 +104,20 @@ class OrderAPI(object):
     def fulfill_order(self, id, location_id, **kwargs):
         fulfillment = dict(kwargs)
         fulfillment["location_id"] = location_id
-        url = self.base_url + "admin/orders/%d/fulfillments.json" % id
+        url = self.admin_url + "orders/%d/fulfillments.json" % id
         self.post(
             url,
             data_j = dict(fulfillment = fulfillment)
         )
 
     def metafields_order(self, id, *args, **kwargs):
-        url = self.base_url + "admin/orders/%d/metafields.json" % id
+        url = self.admin_url + "orders/%d/metafields.json" % id
         contents = self.get(url, **kwargs)
         return contents["metafields"]
 
     def create_metafield_order(self, id, key, value, type = None, value_type = None, namespace = "global"):
         type = type or value_type or "string"
-        url = self.base_url + "admin/orders/%d/metafields.json" % id
+        url = self.admin_url + "orders/%d/metafields.json" % id
         contents = self.post(
             url,
             data_j = dict(

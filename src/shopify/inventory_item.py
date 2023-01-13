@@ -40,16 +40,16 @@ __license__ = "Apache License, Version 2.0"
 class InventoryItemAPI(object):
 
     def list_inventory_items(self, *args, **kwargs):
-        url = self.base_url + "admin/inventory_items.json"
+        url = self.admin_url + "inventory_items.json"
         contents = self.get(url, **kwargs)
         return contents["inventory_items"]
 
     def get_inventory_item(self, id):
-        url = self.base_url + "admin/inventory_items/%d.json" % id
+        url = self.admin_url + "inventory_items/%d.json" % id
         contents = self.get(url)
         return contents["inventory_item"]
 
     def update_inventory_item(self, id, inventory_item):
-        url = self.base_url + "admin/inventory_items/%d.json" % id
+        url = self.admin_url + "inventory_items/%d.json" % id
         contents = self.put(url, data_j = dict(inventory_item = inventory_item))
         return contents["inventory_item"]

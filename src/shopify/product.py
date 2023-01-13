@@ -40,12 +40,12 @@ __license__ = "Apache License, Version 2.0"
 class ProductAPI(object):
 
     def list_products(self, *args, **kwargs):
-        url = self.base_url + "admin/products.json"
+        url = self.admin_url + "products.json"
         contents = self.get(url, **kwargs)
         return contents["products"]
 
     def many_products(self, *args, **kwargs):
-        url = self.base_url + "admin/products.json"
+        url = self.admin_url + "products.json"
         contents = self.get_many(
             url,
             key = "products",
@@ -54,12 +54,12 @@ class ProductAPI(object):
         return contents["products"]
 
     def count_products(self, *args, **kwargs):
-        url = self.base_url + "admin/products/count.json"
+        url = self.admin_url + "products/count.json"
         contents = self.get(url, **kwargs)
         return contents["count"]
 
     def create_product(self, product):
-        url = self.base_url + "admin/products.json"
+        url = self.admin_url + "products.json"
         contents = self.post(
             url,
             data_j = dict(product = product)
@@ -67,36 +67,36 @@ class ProductAPI(object):
         return contents["product"]
 
     def get_product(self, id):
-        url = self.base_url + "admin/products/%d.json" % id
+        url = self.admin_url + "products/%d.json" % id
         contents = self.get(url)
         return contents["product"]
 
     def delete_product(self, id):
-        url = self.base_url + "admin/products/%d.json" % id
+        url = self.admin_url + "products/%d.json" % id
         self.delete(url)
 
     def images_product(self, id, *args, **kwargs):
-        url = self.base_url + "admin/products/%d/images.json" % id
+        url = self.admin_url + "products/%d/images.json" % id
         contents = self.get(url, **kwargs)
         return contents["images"]
 
     def create_image_product(self, id, image):
-        url = self.base_url + "admin/products/%d/images.json" % id
+        url = self.admin_url + "products/%d/images.json" % id
         contents = self.post(url, data_j = dict(image = image))
         return contents["image"]
 
     def delete_image_product(self, id, image_id):
-        url = self.base_url + "admin/products/%d/images/%d.json" % (id, image_id)
+        url = self.admin_url + "products/%d/images/%d.json" % (id, image_id)
         self.delete(url)
 
     def metafields_product(self, id, *args, **kwargs):
-        url = self.base_url + "admin/products/%d/metafields.json" % id
+        url = self.admin_url + "products/%d/metafields.json" % id
         contents = self.get(url, **kwargs)
         return contents["metafields"]
 
     def create_metafield_product(self, id, key, value, type = None, value_type = None, namespace = "global"):
         type = type or value_type or "string"
-        url = self.base_url + "admin/products/%d/metafields.json" % id
+        url = self.admin_url + "products/%d/metafields.json" % id
         contents = self.post(
             url,
             data_j = dict(

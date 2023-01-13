@@ -40,6 +40,6 @@ __license__ = "Apache License, Version 2.0"
 class LocationAPI(object):
 
     def list_locations(self, *args, **kwargs):
-        url = self.base_url + "admin/locations.json"
+        url = self.admin_url + "locations.json"
         contents = self.get(url, **kwargs)
         return contents["locations"]
