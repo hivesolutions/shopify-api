@@ -201,7 +201,7 @@ class API(
         )
         self.website_url = "http://%s/" % (self.website_url or self.store_url)
         self.admin_url = self.base_url + "admin/%s" %\
-            ("api/%s/" % self.api_version if self.api_version else "")
+            (("api/%s/" % self.api_version) if self.api_version else "")
 
 class OAuthAPI(appier.OAuth2API, API):
 
