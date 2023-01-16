@@ -68,3 +68,29 @@ class APITest(unittest.TestCase):
             appier.SecurityError,
             lambda: api.verify_signature("d805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617", b"hello world", base_64 = False)
         )
+
+class OAuthAPITest(unittest.TestCase):
+
+    def test_verify_signature(self):
+        api = shopify.OAuthAPI(
+            api_key = "dummy_api_key",
+            password = "dummy_password",
+            secret = "dummy_secret",
+            store_url = "dummy_store_url",
+        )
+
+        result = api.verify_signature("+AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world")
+        self.assertEqual(result, None)
+
+        self.assertRaises(
+            appier.SecurityError,
+            lambda: api.verify_signature("0AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world")
+        )
+
+        result = api.verify_signature("f805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617", b"hello world", base_64 = False)
+        self.assertEqual(result, None)
+
+        self.assertRaises(
+            appier.SecurityError,
+            lambda: api.verify_signature("d805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617", b"hello world", base_64 = False)
+        )
