@@ -53,6 +53,7 @@ setuptools.setup(
     packages = [
         "shopify"
     ],
+    test_suite = "shopify.test",
     package_dir = {
         "" : os.path.normpath("src")
     },
