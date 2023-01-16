@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-*
+* Issue related to missing replacement of code - [#22](https://github.com/hivesolutions/shopify-api/issues/22)
 
 ## [0.7.0] - 2023-01-13
 

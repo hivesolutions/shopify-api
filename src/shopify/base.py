@@ -256,7 +256,8 @@ class OAuthAPI(appier.OAuth2API, API):
         if not self.store_url:
             raise appier.OperationalError(message = "No store URL provided")
         self.base_url = "https://%s/" % self.store_url
-        self.admin_url = self._build_admin_url()
+        self.admin_url = self.base_url + "admin/%s" %\
+            ("api/%s/" % self.api_version if self.api_version else "")
 
     def _fetch_many(
         self,
@@ -269,7 +270,7 @@ class OAuthAPI(appier.OAuth2API, API):
         **kwargs
     ):
         # creates the sequence that is going to hold the complete set of
-        # items to be retrieved from teh remote data source
+        # items to be retrieved from the remote data source
         items = []
 
         # creates a variable to store the identifier of the last item that was
