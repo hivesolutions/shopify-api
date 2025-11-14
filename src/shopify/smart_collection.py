@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Shopify API
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Shopify API.
 #
@@ -22,20 +22,12 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
+
 
 class SmartCollectionAPI(object):
 
@@ -46,16 +38,12 @@ class SmartCollectionAPI(object):
 
     def many_smart_collections(self, *args, **kwargs):
         url = self.admin_url + "smart_collections.json"
-        contents = self.get_many(
-            url,
-            key = "smart_collections",
-            **kwargs
-        )
+        contents = self.get_many(url, key="smart_collections", **kwargs)
         return contents["smart_collections"]
 
     def create_smart_collection(self, smart_collection):
         url = self.admin_url + "smart_collections.json"
-        contents = self.post(url, data_j = dict(smart_collection = smart_collection))
+        contents = self.post(url, data_j=dict(smart_collection=smart_collection))
         return contents["smart_collection"]
 
     def get_smart_collection(self, id):
@@ -65,7 +53,7 @@ class SmartCollectionAPI(object):
 
     def update_smart_collection(self, id, smart_collection):
         url = self.admin_url + "smart_collections/%d.json" % id
-        contents = self.put(url, data_j = dict(smart_collection = smart_collection))
+        contents = self.put(url, data_j=dict(smart_collection=smart_collection))
         return contents["smart_collection"]
 
     def delete_smart_collection(self, id):

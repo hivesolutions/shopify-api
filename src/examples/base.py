@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Shopify API
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Shopify API.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -41,17 +32,19 @@ import appier
 
 import shopify
 
+
 def get_api():
     return shopify.API(
-        api_key = appier.conf("SHOPIFY_API_KEY"),
-        password = appier.conf("SHOPIFY_PASSWORD"),
-        secret = appier.conf("SHOPIFY_SECRET"),
-        store_url = appier.conf("SHOPIFY_STORE")
+        api_key=appier.conf("SHOPIFY_API_KEY"),
+        password=appier.conf("SHOPIFY_PASSWORD"),
+        secret=appier.conf("SHOPIFY_SECRET"),
+        store_url=appier.conf("SHOPIFY_STORE"),
     )
+
 
 def get_oauth_api():
     return shopify.OAuthAPI(
-        client_id = appier.conf("SHOPIFY_ID"),
-        client_secret = appier.conf("SHOPIFY_SECRET"),
-        redirect_url = appier.conf("SHOPIFY_REDIRECT_URL")
+        client_id=appier.conf("SHOPIFY_ID"),
+        client_secret=appier.conf("SHOPIFY_SECRET"),
+        redirect_url=appier.conf("SHOPIFY_REDIRECT_URL"),
     )

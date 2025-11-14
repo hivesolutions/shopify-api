@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Shopify API
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Shopify API.
 #
@@ -22,20 +22,12 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
+
 
 class ProductAPI(object):
 
@@ -46,11 +38,7 @@ class ProductAPI(object):
 
     def many_products(self, *args, **kwargs):
         url = self.admin_url + "products.json"
-        contents = self.get_many(
-            url,
-            key = "products",
-            **kwargs
-        )
+        contents = self.get_many(url, key="products", **kwargs)
         return contents["products"]
 
     def count_products(self, *args, **kwargs):
@@ -60,10 +48,7 @@ class ProductAPI(object):
 
     def create_product(self, product):
         url = self.admin_url + "products.json"
-        contents = self.post(
-            url,
-            data_j = dict(product = product)
-        )
+        contents = self.post(url, data_j=dict(product=product))
         return contents["product"]
 
     def get_product(self, id):
@@ -82,7 +67,7 @@ class ProductAPI(object):
 
     def create_image_product(self, id, image):
         url = self.admin_url + "products/%d/images.json" % id
-        contents = self.post(url, data_j = dict(image = image))
+        contents = self.post(url, data_j=dict(image=image))
         return contents["image"]
 
     def delete_image_product(self, id, image_id):
@@ -94,18 +79,15 @@ class ProductAPI(object):
         contents = self.get(url, **kwargs)
         return contents["metafields"]
 
-    def create_metafield_product(self, id, key, value, type = None, value_type = None, namespace = "global"):
+    def create_metafield_product(
+        self, id, key, value, type=None, value_type=None, namespace="global"
+    ):
         type = type or value_type or "string"
         url = self.admin_url + "products/%d/metafields.json" % id
         contents = self.post(
             url,
-            data_j = dict(
-                metafield = dict(
-                    namespace = namespace,
-                    key = key,
-                    value = value,
-                    type = type
-                )
-            )
+            data_j=dict(
+                metafield=dict(namespace=namespace, key=key, value=value, type=type)
+            ),
         )
         return contents["metafield"]

@@ -2,6 +2,8 @@
 
 session.shelve
 
+/.venv
+
 /dist
 /build
 /src/shopify_api.egg-info

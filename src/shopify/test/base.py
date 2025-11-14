@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Appier Framework
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Appier Framework.
 #
@@ -22,16 +22,7 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
@@ -43,126 +34,161 @@ import appier
 
 import shopify
 
+
 class APITest(unittest.TestCase):
 
     def test_verify_signature(self):
         api = shopify.API(
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
 
-        result = api.verify_signature("+AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world")
+        result = api.verify_signature(
+            "+AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world"
+        )
         self.assertEqual(result, None)
 
         self.assertRaises(
             appier.SecurityError,
-            lambda: api.verify_signature("0AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world")
+            lambda: api.verify_signature(
+                "0AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world"
+            ),
         )
 
-        result = api.verify_signature("f805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617", b"hello world", base_64 = False)
+        result = api.verify_signature(
+            "f805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617",
+            b"hello world",
+            base_64=False,
+        )
         self.assertEqual(result, None)
 
         self.assertRaises(
             appier.SecurityError,
-            lambda: api.verify_signature("d805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617", b"hello world", base_64 = False)
+            lambda: api.verify_signature(
+                "d805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617",
+                b"hello world",
+                base_64=False,
+            ),
         )
 
     def test_base_url(self):
         api = shopify.API(
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
-        self.assertEqual(api.base_url, "https://dummy_api_key:dummy_password@dummy_store_url/")
+        self.assertEqual(
+            api.base_url, "https://dummy_api_key:dummy_password@dummy_store_url/"
+        )
 
         api = shopify.API(
-            api_version = "2023-01",
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_version="2023-01",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
-        self.assertEqual(api.base_url, "https://dummy_api_key:dummy_password@dummy_store_url/")
+        self.assertEqual(
+            api.base_url, "https://dummy_api_key:dummy_password@dummy_store_url/"
+        )
 
     def test_admin_url(self):
         api = shopify.API(
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
-        self.assertEqual(api.admin_url, "https://dummy_api_key:dummy_password@dummy_store_url/admin/")
+        self.assertEqual(
+            api.admin_url, "https://dummy_api_key:dummy_password@dummy_store_url/admin/"
+        )
 
         api = shopify.API(
-            api_version = "2023-01",
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_version="2023-01",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
-        self.assertEqual(api.admin_url, "https://dummy_api_key:dummy_password@dummy_store_url/admin/api/2023-01/")
+        self.assertEqual(
+            api.admin_url,
+            "https://dummy_api_key:dummy_password@dummy_store_url/admin/api/2023-01/",
+        )
+
 
 class OAuthAPITest(unittest.TestCase):
 
     def test_verify_signature(self):
         api = shopify.OAuthAPI(
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
 
-        result = api.verify_signature("+AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world")
+        result = api.verify_signature(
+            "+AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world"
+        )
         self.assertEqual(result, None)
 
         self.assertRaises(
             appier.SecurityError,
-            lambda: api.verify_signature("0AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world")
+            lambda: api.verify_signature(
+                "0AX/dhRR/3hKfDlZ4NqDhqPz0RXN/56CYxXNeHETdhc=", b"hello world"
+            ),
         )
 
-        result = api.verify_signature("f805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617", b"hello world", base_64 = False)
+        result = api.verify_signature(
+            "f805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617",
+            b"hello world",
+            base_64=False,
+        )
         self.assertEqual(result, None)
 
         self.assertRaises(
             appier.SecurityError,
-            lambda: api.verify_signature("d805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617", b"hello world", base_64 = False)
+            lambda: api.verify_signature(
+                "d805ff761451ff784a7c3959e0da8386a3f3d115cdff9e826315cd7871137617",
+                b"hello world",
+                base_64=False,
+            ),
         )
 
     def test_base_url(self):
         api = shopify.OAuthAPI(
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
         self.assertEqual(api.base_url, "https://dummy_store_url/")
 
         api = shopify.OAuthAPI(
-            api_version = "2023-01",
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_version="2023-01",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
         self.assertEqual(api.base_url, "https://dummy_store_url/")
 
     def test_admin_url(self):
         api = shopify.OAuthAPI(
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
         self.assertEqual(api.admin_url, "https://dummy_store_url/admin/")
 
         api = shopify.OAuthAPI(
-            api_version = "2023-01",
-            api_key = "dummy_api_key",
-            password = "dummy_password",
-            secret = "dummy_secret",
-            store_url = "dummy_store_url",
+            api_version="2023-01",
+            api_key="dummy_api_key",
+            password="dummy_password",
+            secret="dummy_secret",
+            store_url="dummy_store_url",
         )
         self.assertEqual(api.admin_url, "https://dummy_store_url/admin/api/2023-01/")

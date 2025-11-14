@@ -12,9 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     container: python:${{ matrix.python-version }}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - run: python --version
       - run: pip install -r requirements.txt
+      - run: |
+          pip install black
+          black . --check
+        if: matrix.python-version == '3.12'
       - run: python setup.py test
       - run: pip install twine wheel
       - run: python setup.py sdist bdist_wheel

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Hive Shopify API
-# Copyright (c) 2008-2020 Hive Solutions Lda.
+# Copyright (c) 2008-2025 Hive Solutions Lda.
 #
 # This file is part of Hive Shopify API.
 #
@@ -22,20 +22,12 @@
 __author__ = "João Magalhães <joamag@hive.pt>"
 """ The author(s) of the module """
 
-__version__ = "1.0.0"
-""" The version of the module """
-
-__revision__ = "$LastChangedRevision$"
-""" The revision number of the module """
-
-__date__ = "$LastChangedDate$"
-""" The last change date of the module """
-
-__copyright__ = "Copyright (c) 2008-2020 Hive Solutions Lda."
+__copyright__ = "Copyright (c) 2008-2025 Hive Solutions Lda."
 """ The copyright for the module """
 
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
+
 
 class OrderAPI(object):
 
@@ -44,14 +36,14 @@ class OrderAPI(object):
         contents = self.get(url, **kwargs)
         return contents["orders"]
 
-    def list_orders_a(self, limit = 50, all = True, **kwargs):
+    def list_orders_a(self, limit=50, all=True, **kwargs):
         url = self.admin_url + "orders.json"
         orders = self._fetch_many(
             url,
-            item_name = "orders",
-            method_count = self.count_orders,
-            limit = limit,
-            all = all,
+            item_name="orders",
+            method_count=self.count_orders,
+            limit=limit,
+            all=all,
             **kwargs
         )
         return orders
@@ -75,58 +67,36 @@ class OrderAPI(object):
         order = dict(kwargs)
         order["id"] = str(id)
         url = self.admin_url + "orders/%d.json" % id
-        self.put(
-            url,
-            data_j = dict(order = order)
-        )
+        self.put(url, data_j=dict(order=order))
 
     def pay_order(self, id):
         url = self.admin_url + "orders/%d/transactions.json" % id
-        self.post(
-            url,
-            data_j = dict(
-                transaction = dict(
-                    kind = "capture"
-                )
-            )
-        )
+        self.post(url, data_j=dict(transaction=dict(kind="capture")))
 
-    def cancel_order(self, id, restock = True, email = False):
+    def cancel_order(self, id, restock=True, email=False):
         url = self.admin_url + "orders/%d/cancel.json" % id
-        self.post(
-            url,
-            data_j = dict(
-                restock = restock,
-                email = email
-            )
-        )
+        self.post(url, data_j=dict(restock=restock, email=email))
 
     def fulfill_order(self, id, location_id, **kwargs):
         fulfillment = dict(kwargs)
         fulfillment["location_id"] = location_id
         url = self.admin_url + "orders/%d/fulfillments.json" % id
-        self.post(
-            url,
-            data_j = dict(fulfillment = fulfillment)
-        )
+        self.post(url, data_j=dict(fulfillment=fulfillment))
 
     def metafields_order(self, id, *args, **kwargs):
         url = self.admin_url + "orders/%d/metafields.json" % id
         contents = self.get(url, **kwargs)
         return contents["metafields"]
 
-    def create_metafield_order(self, id, key, value, type = None, value_type = None, namespace = "global"):
+    def create_metafield_order(
+        self, id, key, value, type=None, value_type=None, namespace="global"
+    ):
         type = type or value_type or "string"
         url = self.admin_url + "orders/%d/metafields.json" % id
         contents = self.post(
             url,
-            data_j = dict(
-                metafield = dict(
-                    namespace = namespace,
-                    key = key,
-                    value = value,
-                    type = type
-                )
-            )
+            data_j=dict(
+                metafield=dict(namespace=namespace, key=key, value=value, type=type)
+            ),
         )
         return contents["metafield"]
